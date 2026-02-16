@@ -84,7 +84,7 @@ export default function Dashboard({ user }: DashboardProps) {
                         <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center text-2xl">⚡</div>
                         <div>
                             <h1 className="font-bold text-lg leading-tight">Admin PPDB</h1>
-                            <p className="text-emerald-400 text-xs">Al-Khoir Islamic School</p>
+                            <p className="text-emerald-400 text-xs text-wrap">Al-Khoir Islamic School Bin Baz 5</p>
                         </div>
                     </div>
 

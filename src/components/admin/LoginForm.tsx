@@ -26,7 +26,7 @@ export default function LoginForm() {
             <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md border border-slate-200">
                 <div className="text-center mb-8">
                     <h1 className="text-2xl font-bold text-emerald-800">Admin Login</h1>
-                    <p className="text-slate-500">PPDB Al-Khoir Islamic School</p>
+                    <p className="text-slate-500">PPDB Al-Khoir Islamic School Bin Baz 5</p>
                 </div>
 
                 <form onSubmit={handleLogin} className="space-y-6">
