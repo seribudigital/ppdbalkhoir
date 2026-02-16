@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import type { User } from 'firebase/auth';
 import { logout } from '@/lib/firebase/auth';
 import { ambilSemuaPendaftar, PendaftarData, updatePendaftar } from '@/lib/firebase/pendaftar';
+import * as XLSX from 'xlsx';
 
 interface DashboardProps {
     user: User;
@@ -23,6 +24,22 @@ export default function Dashboard({ user }: DashboardProps) {
     useEffect(() => {
         fetchData();
     }, []);
+
+    const handleExport = () => {
+        const worksheet = XLSX.utils.json_to_sheet(filteredData.map((item, index) => ({
+            No: index + 1,
+            'Nama Lengkap': item.nama_lengkap,
+            'Asal Sekolah': item.asal_sekolah,
+            'Jenjang': item.tingkat_pendidikan,
+            'Nama Orang Tua': item.nama_orangtua,
+            'WhatsApp': item.nomor_wa_aktif,
+            'Status': item.status_pendaftaran || 'Menunggu Verifikasi',
+            'Tanggal Daftar': item.tanggal_daftar?.seconds ? new Date(item.tanggal_daftar.seconds * 1000).toLocaleDateString("id-ID") : '-'
+        })));
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Data Pendaftar");
+        XLSX.writeFile(workbook, "Data_PPDB_Al_Khoir.xlsx");
+    };
 
     const handleStatusChange = async (id: string, newStatus: string) => {
         const statusTyped = newStatus as PendaftarData['status_pendaftaran'];
@@ -113,6 +130,16 @@ export default function Dashboard({ user }: DashboardProps) {
                             </button>
                         ))}
                     </div>
+                </div>
+
+                <div className="flex justify-end mb-4">
+                    <button
+                        onClick={handleExport}
+                        className="flex items-center gap-2 px-4 py-2 bg-white text-emerald-600 border border-emerald-500 rounded-lg hover:bg-emerald-50 transition font-medium text-sm shadow-sm"
+                    >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+                        Export to Excel
+                    </button>
                 </div>
 
                 <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
