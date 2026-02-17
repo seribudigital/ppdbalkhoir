@@ -1,13 +1,22 @@
 import React from 'react';
 import Link from 'next/link';
-import RegistrationForm from '@/components/RegistrationForm';
+import dynamic from 'next/dynamic';
 
 // Import Client Components
 import HeroSection from '@/components/home/HeroSection';
 import VisimisiSection from '@/components/home/VisimisiSection';
 import KurikulumSection from '@/components/home/KurikulumSection';
-import GallerySection from '@/components/home/GallerySection';
-import ScheduleSection from '@/components/home/ScheduleSection';
+
+// Lazy Load Heavy Components
+const GallerySection = dynamic(() => import('@/components/home/GallerySection'), {
+  loading: () => <div className="h-96 flex items-center justify-center bg-slate-50 text-slate-400">Loading Gallery...</div>
+});
+const ScheduleSection = dynamic(() => import('@/components/home/ScheduleSection'), {
+  loading: () => <div className="h-96 flex items-center justify-center bg-slate-50 text-slate-400">Loading Schedule...</div>
+});
+const RegistrationForm = dynamic(() => import('@/components/RegistrationForm'), {
+  loading: () => <div className="h-96 flex items-center justify-center bg-slate-100 text-slate-400 rounded-3xl">Loading Form...</div>
+});
 
 export default function Home() {
   return (
