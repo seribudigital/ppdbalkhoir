@@ -8,14 +8,15 @@ import VisimisiSection from '@/components/home/VisimisiSection';
 import KurikulumSection from '@/components/home/KurikulumSection';
 
 // Lazy Load Heavy Components
+// Lazy Load Heavy Components
 const GallerySection = dynamic(() => import('@/components/home/GallerySection'), {
-  loading: () => <div className="h-96 flex items-center justify-center bg-slate-50 text-slate-400">Loading Gallery...</div>
+  loading: () => <div className="min-h-[800px] flex items-center justify-center bg-slate-50 text-slate-400">Loading Gallery...</div>
 });
 const ScheduleSection = dynamic(() => import('@/components/home/ScheduleSection'), {
-  loading: () => <div className="h-96 flex items-center justify-center bg-slate-50 text-slate-400">Loading Schedule...</div>
+  loading: () => <div className="min-h-[600px] flex items-center justify-center bg-slate-50 text-slate-400">Loading Schedule...</div>
 });
 const RegistrationForm = dynamic(() => import('@/components/RegistrationForm'), {
-  loading: () => <div className="h-96 flex items-center justify-center bg-slate-100 text-slate-400 rounded-3xl">Loading Form...</div>
+  loading: () => <div className="min-h-[800px] flex items-center justify-center bg-slate-100 text-slate-400 rounded-3xl">Loading Form...</div>
 });
 
 export default function Home() {
