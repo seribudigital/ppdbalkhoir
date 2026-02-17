@@ -40,13 +40,21 @@ export default function Navbar() {
     return (
         <nav
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-                    ? 'bg-white/90 backdrop-blur-md shadow-md py-3'
-                    : 'bg-transparent py-5'
+                ? 'bg-white/90 backdrop-blur-md shadow-md py-3'
+                : 'bg-transparent py-5'
                 }`}
         >
             <div className="container mx-auto px-6 flex items-center justify-between">
                 {/* Logo / Brand */}
-                <Link href="/" className="flex items-center gap-3 group">
+                {/* Logo / Brand */}
+                <Link
+                    href="#"
+                    onClick={(e) => {
+                        e.preventDefault();
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }}
+                    className="flex items-center gap-3 group"
+                >
                     <div className="relative w-10 h-10 overflow-hidden rounded-full border-2 border-emerald-100 group-hover:border-emerald-400 transition-colors">
                         <img
                             src="https://hujtpnndfhnxddglztdn.supabase.co/storage/v1/object/public/seribudigital/mts.webp"
@@ -56,9 +64,9 @@ export default function Navbar() {
                     </div>
                     <div>
                         <h1 className={`font-bold text-lg leading-tight ${isScrolled ? 'text-emerald-900' : 'text-white'}`}>
-                            Al-Khoir
+                            Al-Khoir Islamic School
                         </h1>
-                        <p className={`text-xs ${isScrolled ? 'text-emerald-600' : 'text-emerald-100'}`}>Islamic School</p>
+                        <p className={`text-xs ${isScrolled ? 'text-emerald-600' : 'text-emerald-100'}`}>Bin Baz 5</p>
                     </div>
                 </Link>
 
@@ -81,8 +89,8 @@ export default function Navbar() {
                         href="#daftar"
                         onClick={(e) => handleScrollToSection(e, '#daftar')}
                         className={`px-5 py-2 rounded-full font-bold text-sm transition-all transform hover:scale-105 ${isScrolled
-                                ? 'bg-emerald-600 text-white hover:bg-emerald-700 shadow-emerald-200 shadow-lg'
-                                : 'bg-white text-emerald-800 hover:bg-emerald-50 shadow-lg'
+                            ? 'bg-emerald-600 text-white hover:bg-emerald-700 shadow-emerald-200 shadow-lg'
+                            : 'bg-white text-emerald-800 hover:bg-emerald-50 shadow-lg'
                             }`}
                     >
                         Daftar Sekarang
