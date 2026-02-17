@@ -5,6 +5,7 @@ import { logout } from '@/lib/firebase/auth';
 import { ambilSemuaPendaftar, PendaftarData, updatePendaftar } from '@/lib/firebase/pendaftar';
 import * as XLSX from 'xlsx';
 import Sidebar from './Sidebar';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface DashboardProps {
     user: User;
@@ -14,6 +15,7 @@ export default function Dashboard({ user }: DashboardProps) {
     const [data, setData] = useState<PendaftarData[]>([]);
     const [loading, setLoading] = useState(true);
     const [filter, setFilter] = useState<'Semua' | 'MTs' | 'MA'>('Semua');
+    const [selectedStudent, setSelectedStudent] = useState<PendaftarData | null>(null);
 
     const fetchData = async () => {
         setLoading(true);
@@ -28,37 +30,55 @@ export default function Dashboard({ user }: DashboardProps) {
 
     const handleExport = () => {
         const worksheet = XLSX.utils.json_to_sheet(filteredData.map((item, index) => ({
-            No: index + 1,
-            'Nama Lengkap': item.nama_lengkap,
-            'Asal Sekolah': item.asal_sekolah,
-            'Jenjang': item.tingkat_pendidikan,
-            'Nama Orang Tua': item.nama_orangtua,
-            'WhatsApp': item.nomor_wa_aktif,
-            'Status': item.status_pendaftaran || 'Menunggu Verifikasi',
-            'Tanggal Daftar': item.tanggal_daftar?.seconds ? new Date(item.tanggal_daftar.seconds * 1000).toLocaleDateString("id-ID") : '-'
+            'No': index + 1,
+            'Nama Lengkap': item.nama_lengkap || '-',
+            'Program': item.tingkat_pendidikan || '-',
+            'NISN': item.nisn || '-',
+            'Tempat Lahir': item.tempat_lahir || '-',
+            'Tanggal Lahir': item.tanggal_lahir || '-',
+            'Jenis Kelamin': item.jenis_kelamin || '-',
+            'Anak Ke-': item.anak_ke || '-',
+            'Asal Sekolah': item.asal_sekolah || '-',
+            'Alamat Asal Sekolah': item.alamat_sekolah_asal || '-',
+            'Kelas Asal Sekolah': item.kelas_sekolah_asal || '-',
+            'Nomor KK': item.nomor_kk || '-',
+            'Nama Ayah': item.nama_ayah || '-',
+            'NIK Ayah': item.nik_ayah || '-',
+            'Pendidikan Ayah': item.pendidikan_ayah || '-',
+            'Pekerjaan Ayah': item.pekerjaan_ayah || '-',
+            'No HP Ayah': item.nomor_wa_ayah || '-',
+            'Nama Ibu': item.nama_ibu || '-',
+            'NIK Ibu': item.nik_ibu || '-',
+            'Pendidikan Ibu': item.pendidikan_ibu || '-',
+            'Pekerjaan Ibu': item.pekerjaan_ibu || '-',
+            'No HP Ibu': item.nomor_wa_ibu || '-',
+            'Alamat Lengkap': item.alamat_lengkap || '-',
+            'Kecamatan': item.kecamatan || '-',
+            'Kabupaten': item.kabupaten || '-',
+            'Provinsi': item.provinsi || '-',
+            'Tanggal Mendaftar': item.tanggal_daftar?.seconds ? new Date(item.tanggal_daftar.seconds * 1000).toLocaleDateString("id-ID") : '-'
         })));
+
+        // Auto-width columns
+        const wscols = Object.keys(worksheet).filter(key => key[0] !== '!').map(() => ({ wch: 20 }));
+        worksheet['!cols'] = wscols;
+
         const workbook = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(workbook, worksheet, "Data Pendaftar");
-        XLSX.writeFile(workbook, "Data_PPDB_Al_Khoir.xlsx");
+        XLSX.writeFile(workbook, "Data_PPDB_Al_Khoir_Lengkap.xlsx");
     };
 
     const handleStatusChange = async (id: string, newStatus: string) => {
         const statusTyped = newStatus as PendaftarData['status_pendaftaran'];
-        // Optimistic update
         setData((prev) =>
             prev.map((item) => (item.id === id ? { ...item, status_pendaftaran: statusTyped } : item))
         );
 
         const res = await updatePendaftar(id, { status_pendaftaran: statusTyped });
         if (!res.success) {
-            // Revert if failed
             alert('Gagal mengupdate status');
             fetchData();
         }
-    };
-
-    const handleLogout = async () => {
-        await logout();
     };
 
     const filteredData = filter === 'Semua'
@@ -122,11 +142,11 @@ export default function Dashboard({ user }: DashboardProps) {
                                     <tr className="bg-slate-50 border-b border-slate-200 text-slate-500 text-sm uppercase tracking-wider">
                                         <th className="p-4 font-semibold w-12 text-center">No</th>
                                         <th className="p-4 font-semibold">Nama Siswa</th>
-                                        <th className="p-4 font-semibold">Asal Sekolah</th>
                                         <th className="p-4 font-semibold">Jenjang</th>
-                                        <th className="p-4 font-semibold">Wali & Kontak</th>
+                                        <th className="p-4 font-semibold">Kontak</th>
                                         <th className="p-4 font-semibold">Tanggal Daftar</th>
                                         <th className="p-4 font-semibold">Status</th>
+                                        <th className="p-4 font-semibold text-center">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-slate-100">
@@ -138,16 +158,17 @@ export default function Dashboard({ user }: DashboardProps) {
                                         filteredData.map((item, index) => (
                                             <tr key={item.id} className="hover:bg-slate-50/50 transition">
                                                 <td className="p-4 text-center text-slate-400">{index + 1}</td>
-                                                <td className="p-4 font-medium text-slate-800">{item.nama_lengkap}</td>
-                                                <td className="p-4 text-slate-600">{item.asal_sekolah}</td>
+                                                <td className="p-4 font-medium text-slate-800">
+                                                    <div>{item.nama_lengkap}</div>
+                                                    <div className="text-xs text-slate-400">{item.asal_sekolah}</div>
+                                                </td>
                                                 <td className="p-4">
                                                     <span className={`px-3 py-1 rounded-full text-xs font-bold ${item.tingkat_pendidikan === 'MTs' ? 'bg-emerald-50 text-emerald-700 border border-emerald-100' : 'bg-cyan-50 text-cyan-700 border border-cyan-100'}`}>
                                                         {item.tingkat_pendidikan}
                                                     </span>
                                                 </td>
-                                                <td className="p-4 text-sm">
-                                                    <div className="text-slate-800 font-medium">{item.nama_orangtua}</div>
-                                                    <div className="text-slate-500">{item.nomor_wa_aktif}</div>
+                                                <td className="p-4 text-sm font-mono text-slate-600">
+                                                    {item.nomor_wa_aktif}
                                                 </td>
                                                 <td className="p-4 text-slate-500 text-sm">
                                                     {item.tanggal_daftar?.seconds
@@ -172,6 +193,14 @@ export default function Dashboard({ user }: DashboardProps) {
                                                         </div>
                                                     </div>
                                                 </td>
+                                                <td className="p-4 text-center">
+                                                    <button
+                                                        onClick={() => setSelectedStudent(item)}
+                                                        className="px-3 py-1.5 text-xs font-bold text-white bg-slate-800 rounded hover:bg-slate-700 transition"
+                                                    >
+                                                        Detail
+                                                    </button>
+                                                </td>
                                             </tr>
                                         ))
                                     )}
@@ -181,6 +210,133 @@ export default function Dashboard({ user }: DashboardProps) {
                     )}
                 </div>
             </main>
+
+            {/* Student Detail Modal */}
+            <AnimatePresence>
+                {selectedStudent && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        onClick={() => setSelectedStudent(null)}
+                        className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto"
+                    >
+                        <motion.div
+                            initial={{ scale: 0.95, opacity: 0, y: 20 }}
+                            animate={{ scale: 1, opacity: 1, y: 0 }}
+                            exit={{ scale: 0.95, opacity: 0, y: 20 }}
+                            onClick={(e) => e.stopPropagation()}
+                            className="bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] flex flex-col overflow-hidden"
+                        >
+                            {/* Modal Header */}
+                            <div className="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50">
+                                <div>
+                                    <h3 className="text-2xl font-bold text-emerald-900">{selectedStudent.nama_lengkap}</h3>
+                                    <span className={`px-2 py-0.5 rounded text-xs font-bold ${selectedStudent.tingkat_pendidikan === 'MTs' ? 'bg-emerald-100 text-emerald-700' : 'bg-cyan-100 text-cyan-700'}`}>
+                                        {selectedStudent.tingkat_pendidikan}
+                                    </span>
+                                    <span className="ml-2 text-slate-500 text-sm">
+                                        Daftar: {selectedStudent.tanggal_daftar?.seconds ? new Date(selectedStudent.tanggal_daftar.seconds * 1000).toLocaleDateString("id-ID") : '-'}
+                                    </span>
+                                </div>
+                                <button
+                                    onClick={() => setSelectedStudent(null)}
+                                    className="p-2 hover:bg-slate-200 rounded-full transition"
+                                >
+                                    <svg className="w-6 h-6 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+                                </button>
+                            </div>
+
+                            {/* Modal Content - Scrollable */}
+                            <div className="p-6 overflow-y-auto custom-scrollbar">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                    {/* Kolom Kiri */}
+                                    <div className="space-y-8">
+                                        <Section title="👤 Data Pribadi">
+                                            <Item label="NISN" value={selectedStudent.nisn} />
+                                            <Item label="Tempat, Tanggal Lahir" value={`${selectedStudent.tempat_lahir || '-'}, ${selectedStudent.tanggal_lahir || '-'}`} />
+                                            <Item label="Jenis Kelamin" value={selectedStudent.jenis_kelamin} />
+                                            <Item label="Anak Ke-" value={selectedStudent.anak_ke} />
+                                        </Section>
+
+                                        <Section title="🏫 Sekolah Asal">
+                                            <Item label="Nama Sekolah" value={selectedStudent.asal_sekolah} />
+                                            <Item label="Alamat Sekolah" value={selectedStudent.alamat_sekolah_asal} />
+                                            <Item label="Kelas Terakhir" value={selectedStudent.kelas_sekolah_asal} />
+                                        </Section>
+
+                                        <Section title="🏠 Alamat Rumah">
+                                            <Item label="Alamat Lengkap" value={selectedStudent.alamat_lengkap} />
+                                            <div className="grid grid-cols-2 gap-2">
+                                                <Item label="Kecamatan" value={selectedStudent.kecamatan} />
+                                                <Item label="Kabupaten" value={selectedStudent.kabupaten} />
+                                                <Item label="Provinsi" value={selectedStudent.provinsi} />
+                                            </div>
+                                        </Section>
+                                    </div>
+
+                                    {/* Kolom Kanan */}
+                                    <div className="space-y-8">
+                                        <Section title="👨 Data Ayah">
+                                            <Item label="Nama Ayah" value={selectedStudent.nama_ayah} />
+                                            <Item label="NIK" value={selectedStudent.nik_ayah} />
+                                            <Item label="Pendidikan" value={selectedStudent.pendidikan_ayah} />
+                                            <Item label="Pekerjaan" value={selectedStudent.pekerjaan_ayah} />
+                                            <Item label="No. WA" value={selectedStudent.nomor_wa_ayah} />
+                                        </Section>
+
+                                        <Section title="🧕 Data Ibu">
+                                            <Item label="Nama Ibu" value={selectedStudent.nama_ibu} />
+                                            <Item label="NIK" value={selectedStudent.nik_ibu} />
+                                            <Item label="Pendidikan" value={selectedStudent.pendidikan_ibu} />
+                                            <Item label="Pekerjaan" value={selectedStudent.pekerjaan_ibu} />
+                                            <Item label="No. WA" value={selectedStudent.nomor_wa_ibu} />
+                                        </Section>
+
+                                        <Section title="📄 Lainnya">
+                                            <Item label="Nomor KK" value={selectedStudent.nomor_kk} />
+                                            <Item label="Nama Wali (Legacy)" value={selectedStudent.nama_orangtua} />
+                                            <Item label="No WA (Legacy)" value={selectedStudent.nomor_wa_aktif} />
+                                        </Section>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Modal Footer */}
+                            <div className="p-4 border-t border-slate-100 bg-slate-50 flex justify-end">
+                                <button
+                                    onClick={() => setSelectedStudent(null)}
+                                    className="px-6 py-2 bg-slate-800 text-white rounded-lg hover:bg-slate-900 transition font-medium"
+                                >
+                                    Tutup
+                                </button>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </div>
+    );
+}
+
+function Section({ title, children }: { title: string, children: React.ReactNode }) {
+    return (
+        <div className="space-y-3">
+            <h4 className="font-bold text-emerald-800 border-b border-emerald-100 pb-2 flex items-center gap-2">
+                {title}
+            </h4>
+            <div className="space-y-2">
+                {children}
+            </div>
+        </div>
+    );
+}
+
+function Item({ label, value }: { label: string, value?: string | number }) {
+    return (
+        <div className="flex flex-col sm:flex-row sm:justify-between border-b border-slate-50 pb-1 last:border-0">
+            <span className="text-sm text-slate-500">{label}</span>
+            <span className="text-sm font-medium text-slate-800 text-right">{value || '-'}</span>
         </div>
     );
 }

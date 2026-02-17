@@ -22,6 +22,37 @@ export interface PendaftarData {
     asal_sekolah: string;
     nama_orangtua: string;
     nomor_wa_aktif: string;
+    // Data Diri
+    nisn?: string;
+    tempat_lahir?: string;
+    tanggal_lahir?: string; // Format YYYY-MM-DD
+    jenis_kelamin?: "Laki-laki" | "Perempuan";
+    anak_ke?: number;
+
+    // Data Sekolah Asal
+    alamat_sekolah_asal?: string;
+    kelas_sekolah_asal?: string;
+
+    // Data Orang Tua
+    nomor_kk?: string;
+    nama_ayah?: string;
+    nik_ayah?: string;
+    pendidikan_ayah?: string;
+    pekerjaan_ayah?: string;
+    nomor_wa_ayah?: string;
+
+    nama_ibu?: string;
+    nik_ibu?: string;
+    pendidikan_ibu?: string;
+    pekerjaan_ibu?: string;
+    nomor_wa_ibu?: string;
+
+    // Alamat
+    alamat_lengkap?: string;
+    kecamatan?: string;
+    kabupaten?: string;
+    provinsi?: string;
+
     status_pendaftaran?: "Menunggu Verifikasi" | "Jadwal Tes" | "Diterima" | "Ditolak";
     tanggal_daftar?: Timestamp;
     [key: string]: any;
