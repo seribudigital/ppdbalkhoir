@@ -22,12 +22,13 @@ export default function HeroSection() {
                     placeholder="blur"
                     blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAADAAQDAREAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAwAE/8QAIhAAAQMDBAMAAAAAAAAAAAAAAQACAwQRBRIhMUFxEyJh/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/Ao91gq//2Q=="
                     className="object-cover object-center"
-                    quality={90}
+                    quality={75}
+                    sizes="100vw"
                 />
             </div>
 
             {/* Overlay for Readability */}
-            <div className="absolute inset-0 bg-emerald-900/80 backdrop-blur-[2px]"></div>
+            <div className="absolute inset-0 bg-emerald-900/80"></div>
             <div className="absolute inset-0 bg-gradient-to-t from-emerald-950 via-transparent to-emerald-950/50"></div>
 
             <div className="container mx-auto px-6 text-center z-10 pt-20">
