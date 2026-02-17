@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic';
 
 // Import Client Components
 import HeroSection from '@/components/home/HeroSection';
+import Navbar from '@/components/layout/Navbar';
 import VisimisiSection from '@/components/home/VisimisiSection';
 import KurikulumSection from '@/components/home/KurikulumSection';
 
@@ -23,6 +24,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-slate-50 text-emerald-900 font-sans selection:bg-cyan-200 selection:text-emerald-900">
 
+      <Navbar />
       <HeroSection />
 
       {/* Hero Tagline Banner - Static (Server Side) */}
@@ -51,12 +53,12 @@ export default function Home() {
       </div>
 
       {/* Section: Latar Belakang - Static (Server Side) */}
-      <section className="py-20 px-6 bg-white">
+      <section id="latar-belakang" className="py-20 px-6 bg-white">
         <div className="container mx-auto max-w-4xl text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-emerald-800 mb-8">Latar Belakang</h2>
           <div className="bg-slate-50 p-8 md:p-12 rounded-3xl border border-slate-100 shadow-sm">
             <p className="text-lg text-slate-700 leading-relaxed">
-              &quot;Sekolah Menengah Pertama Islam Terpadu Al-Khoir Islamic School Bin Baz 5 merupakan lembaga pendidikan yang memadukan model pendidikan ala pesantren salaf dengan kurikulum modern. Mengadopsi dari sistem pembelajaran yang diterapkan di Islamic Centre Bin Baz Yogyakarta, diharapkan Al Khoir Boarding School ini bisa melahirkan generasi robbani yang senantiasa berpegang pada ajaran-ajaran Al-Qur&apos;an dan Sunnah Rasulullah Shallallahu &apos;alaihi wasallam.&quot;
+              &quot;Madrasah Tsanawiyah dan Madrasah Aliyah Al-Khoir Islamic School Bin Baz 5 merupakan lembaga pendidikan yang memadukan model pendidikan ala pesantren salaf dengan kurikulum modern. Mengadopsi dari sistem pembelajaran yang diterapkan di Islamic Centre Bin Baz Yogyakarta, diharapkan Al Khoir Boarding School ini bisa melahirkan generasi robbani yang senantiasa berpegang pada ajaran-ajaran Al-Qur&apos;an dan Sunnah Rasulullah Shallallahu &apos;alaihi wasallam.&quot;
             </p>
           </div>
         </div>
@@ -64,7 +66,9 @@ export default function Home() {
 
       <VisimisiSection />
 
-      <KurikulumSection />
+      <div id="kurikulum">
+        <KurikulumSection />
+      </div>
 
       {/* Section: Prestasi Kami - Static (Server Side, unless interactive) */}
       <section className="py-20 px-6 bg-white">
@@ -133,7 +137,7 @@ export default function Home() {
       </section>
 
       {/* Section 3: Rincian Biaya - Static (Server Side) */}
-      <section className="py-24 px-6 bg-slate-50 relative">
+      <section id="biaya" className="py-24 px-6 bg-slate-50 relative">
         <div className="container mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-emerald-800 mb-4">Rincian Biaya Pendidikan</h2>
@@ -268,7 +272,7 @@ export default function Home() {
       <ScheduleSection />
 
       {/* Form Section - RegistrationForm handles its own state (Client Component) */}
-      <div id="form-section" className="py-32 bg-slate-100 min-h-[600px] flex items-center justify-center relative">
+      <div id="daftar" className="py-32 bg-slate-100 min-h-[600px] flex items-center justify-center relative">
         <div className="absolute inset-0 bg-[url('/pattern.png')] opacity-5"></div>
         <div className="container mx-auto px-6 z-10">
           <div className="text-center mb-12">
@@ -281,7 +285,7 @@ export default function Home() {
       </div>
 
       {/* Simple Footer - Static (Server Side) */}
-      <footer className="bg-slate-900 text-slate-500 py-8 text-center text-sm">
+      <footer id="kontak" className="bg-slate-900 text-slate-500 py-8 text-center text-sm">
         <div className="container mx-auto px-6">
           <p className="mb-4">&copy; {new Date().getFullYear()} Al-Khoir Islamic School Bin Baz 5. All rights reserved.</p>
           <Link href="/admin" className="text-slate-700 hover:text-slate-400 transition-colors text-xs">

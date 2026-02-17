@@ -15,8 +15,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "PPDB Al-Khoir Islamic School Bin Baz 5",
-  description: "Penerimaan Peserta Didik Baru Al-Khoir Islamic School Bin Baz 5",
+  title: "PPDB MTs & MA Al-Khoir Islamic School Bin Baz 5",
+  description: "Penerimaan Peserta Didik Baru Madrasah Tsanawiyah (MTs) dan Madrasah Aliyah (MA) Al-Khoir Islamic School Bin Baz 5. Sekolah Islam unggulan di Cikande, Serang, Banten dengan kurikulum tahfidz dan asrama.",
+  icons: {
+    icon: "https://hujtpnndfhnxddglztdn.supabase.co/storage/v1/object/public/seribudigital/mts.webp",
+  },
 };
 
 export default function RootLayout({

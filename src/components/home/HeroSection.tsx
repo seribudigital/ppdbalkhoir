@@ -44,12 +44,22 @@ export default function HeroSection() {
                         <span className="block mt-2 text-lg font-normal opacity-90">Tingkat MTs & MA (Islamic Center Bin Baz 5 Cab. Cikande)</span>
                     </p>
 
-                    <a
-                        href="#form-section"
-                        className="px-10 py-5 bg-cyan-600 text-white font-bold text-lg rounded-full shadow-[0_10px_20px_rgba(8,145,178,0.3)] hover:shadow-[0_15px_30px_rgba(8,145,178,0.4)] hover:bg-cyan-500 transition-all duration-300 ring-4 ring-cyan-400/20 transform hover:scale-105 active:scale-95 inline-block"
-                    >
-                        Daftar Sekarang
-                    </a>
+                    <div className="flex flex-col md:flex-row items-center justify-center gap-4">
+                        <a
+                            href="#daftar"
+                            className="px-10 py-5 bg-cyan-600 text-white font-bold text-lg rounded-full shadow-[0_10px_20px_rgba(8,145,178,0.3)] hover:shadow-[0_15px_30px_rgba(8,145,178,0.4)] hover:bg-cyan-500 transition-all duration-300 ring-4 ring-cyan-400/20 transform hover:scale-105 active:scale-95 inline-block"
+                        >
+                            Daftar Sekarang
+                        </a>
+                        <a
+                            href="https://hujtpnndfhnxddglztdn.supabase.co/storage/v1/object/public/seribudigital/BROSUR1.pdf"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-10 py-5 bg-white text-emerald-800 font-bold text-lg rounded-full shadow-lg hover:shadow-xl hover:bg-gray-50 transition-all duration-300 ring-4 ring-white/20 transform hover:scale-105 active:scale-95 inline-block"
+                        >
+                            Download Brosur (PDF)
+                        </a>
+                    </div>
                 </div>
             </div>
 
