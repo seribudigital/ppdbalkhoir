@@ -14,17 +14,23 @@ export default function SettingsPage() {
     const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
 
     const [schedule, setSchedule] = useState({
-        tanggal_pendaftaran: '',
-        tanggal_tes: '',
-        tanggal_pengumuman: '',
-        tanggal_daftar_ulang: ''
+        gelombang1: {
+            pendaftaran: '',
+            tes: '',
+            pengumuman: '',
+            daftar_ulang: ''
+        },
+        gelombang2: {
+            pendaftaran: '',
+            tes: '',
+            pengumuman: '',
+            daftar_ulang: ''
+        }
     });
 
     useEffect(() => {
         const unsubscribe = subscribeToAuthChanges((currentUser) => {
             setUser(currentUser);
-            // Don't set loading false here immediately, wait for data fetch if needed
-            // But for auth check it's enough
             if (!currentUser) setLoading(false);
         });
         return () => unsubscribe();
@@ -42,11 +48,20 @@ export default function SettingsPage() {
             const docSnap = await getDoc(docRef);
             if (docSnap.exists()) {
                 const data = docSnap.data();
+                // Handle potential missing data for new structure
                 setSchedule({
-                    tanggal_pendaftaran: data.tanggal_pendaftaran || '',
-                    tanggal_tes: data.tanggal_tes || '',
-                    tanggal_pengumuman: data.tanggal_pengumuman || '',
-                    tanggal_daftar_ulang: data.tanggal_daftar_ulang || ''
+                    gelombang1: {
+                        pendaftaran: data.gelombang1?.pendaftaran || data.tanggal_pendaftaran || '',
+                        tes: data.gelombang1?.tes || data.tanggal_tes || '',
+                        pengumuman: data.gelombang1?.pengumuman || data.tanggal_pengumuman || '',
+                        daftar_ulang: data.gelombang1?.daftar_ulang || data.tanggal_daftar_ulang || ''
+                    },
+                    gelombang2: {
+                        pendaftaran: data.gelombang2?.pendaftaran || '',
+                        tes: data.gelombang2?.tes || '',
+                        pengumuman: data.gelombang2?.pengumuman || '',
+                        daftar_ulang: data.gelombang2?.daftar_ulang || ''
+                    }
                 });
             }
         } catch (error) {
@@ -56,11 +71,14 @@ export default function SettingsPage() {
         }
     };
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSchedule({
-            ...schedule,
-            [e.target.name]: e.target.value
-        });
+    const handleChange = (wave: 'gelombang1' | 'gelombang2', field: string, value: string) => {
+        setSchedule(prev => ({
+            ...prev,
+            [wave]: {
+                ...prev[wave],
+                [field]: value
+            }
+        }));
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -111,7 +129,7 @@ export default function SettingsPage() {
                     <h2 className="text-3xl font-bold text-emerald-900">Pengaturan</h2>
                 </div>
 
-                <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 max-w-2xl">
+                <div className="max-w-4xl">
                     <h3 className="text-xl font-bold text-slate-800 mb-6 pb-4 border-b border-slate-100">Atur Jadwal Pendaftaran</h3>
 
                     {message && (
@@ -120,56 +138,113 @@ export default function SettingsPage() {
                         </div>
                     )}
 
-                    <form onSubmit={handleSubmit} className="space-y-6">
-                        <div>
-                            <label className="block text-sm font-medium text-slate-700 mb-2">Tanggal Pendaftaran</label>
-                            <input
-                                type="text"
-                                name="tanggal_pendaftaran"
-                                value={schedule.tanggal_pendaftaran}
-                                onChange={handleChange}
-                                placeholder="Contoh: 01 Okt 2025 - 30 Jan 2026"
-                                className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
-                            />
+                    <form onSubmit={handleSubmit} className="space-y-8">
+
+                        <div className="grid md:grid-cols-2 gap-8">
+                            {/* Gelombang 1 */}
+                            <div className="bg-white rounded-2xl shadow-sm border border-emerald-200 p-6 relative overflow-hidden">
+                                <div className="absolute top-0 left-0 w-full h-1 bg-emerald-500"></div>
+                                <h4 className="text-lg font-bold text-emerald-800 mb-4 flex items-center gap-2">
+                                    <span className="w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs">1</span>
+                                    Gelombang 1
+                                </h4>
+                                <div className="space-y-4">
+                                    <div>
+                                        <label className="block text-sm font-medium text-slate-700 mb-1">Tanggal Pendaftaran</label>
+                                        <input
+                                            type="text"
+                                            value={schedule.gelombang1.pendaftaran}
+                                            onChange={(e) => handleChange('gelombang1', 'pendaftaran', e.target.value)}
+                                            placeholder="Contoh: 01 Okt - 30 Jan"
+                                            className="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition text-sm"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm font-medium text-slate-700 mb-1">Tanggal Tes Seleksi</label>
+                                        <input
+                                            type="text"
+                                            value={schedule.gelombang1.tes}
+                                            onChange={(e) => handleChange('gelombang1', 'tes', e.target.value)}
+                                            placeholder="Contoh: 31 Jan 2026"
+                                            className="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition text-sm"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm font-medium text-slate-700 mb-1">Tanggal Pengumuman</label>
+                                        <input
+                                            type="text"
+                                            value={schedule.gelombang1.pengumuman}
+                                            onChange={(e) => handleChange('gelombang1', 'pengumuman', e.target.value)}
+                                            placeholder="Contoh: 07 Feb 2026"
+                                            className="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition text-sm"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm font-medium text-slate-700 mb-1">Tanggal Daftar Ulang</label>
+                                        <input
+                                            type="text"
+                                            value={schedule.gelombang1.daftar_ulang}
+                                            onChange={(e) => handleChange('gelombang1', 'daftar_ulang', e.target.value)}
+                                            placeholder="Contoh: 14 Feb 2026"
+                                            className="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition text-sm"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Gelombang 2 */}
+                            <div className="bg-white rounded-2xl shadow-sm border border-cyan-200 p-6 relative overflow-hidden">
+                                <div className="absolute top-0 left-0 w-full h-1 bg-cyan-500"></div>
+                                <h4 className="text-lg font-bold text-cyan-800 mb-4 flex items-center gap-2">
+                                    <span className="w-6 h-6 rounded-full bg-cyan-100 text-cyan-600 flex items-center justify-center text-xs">2</span>
+                                    Gelombang 2
+                                </h4>
+                                <div className="space-y-4">
+                                    <div>
+                                        <label className="block text-sm font-medium text-slate-700 mb-1">Tanggal Pendaftaran</label>
+                                        <input
+                                            type="text"
+                                            value={schedule.gelombang2.pendaftaran}
+                                            onChange={(e) => handleChange('gelombang2', 'pendaftaran', e.target.value)}
+                                            placeholder="Contoh: 01 Feb - 30 Mar"
+                                            className="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 outline-none transition text-sm"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm font-medium text-slate-700 mb-1">Tanggal Tes Seleksi</label>
+                                        <input
+                                            type="text"
+                                            value={schedule.gelombang2.tes}
+                                            onChange={(e) => handleChange('gelombang2', 'tes', e.target.value)}
+                                            placeholder="Contoh: 05 Apr 2026"
+                                            className="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 outline-none transition text-sm"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm font-medium text-slate-700 mb-1">Tanggal Pengumuman</label>
+                                        <input
+                                            type="text"
+                                            value={schedule.gelombang2.pengumuman}
+                                            onChange={(e) => handleChange('gelombang2', 'pengumuman', e.target.value)}
+                                            placeholder="Contoh: 12 Apr 2026"
+                                            className="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 outline-none transition text-sm"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm font-medium text-slate-700 mb-1">Tanggal Daftar Ulang</label>
+                                        <input
+                                            type="text"
+                                            value={schedule.gelombang2.daftar_ulang}
+                                            onChange={(e) => handleChange('gelombang2', 'daftar_ulang', e.target.value)}
+                                            placeholder="Contoh: 19 Apr 2026"
+                                            className="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 outline-none transition text-sm"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
-                        <div>
-                            <label className="block text-sm font-medium text-slate-700 mb-2">Tanggal Tes Seleksi</label>
-                            <input
-                                type="text"
-                                name="tanggal_tes"
-                                value={schedule.tanggal_tes}
-                                onChange={handleChange}
-                                placeholder="Contoh: 31 Jan 2026"
-                                className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
-                            />
-                        </div>
-
-                        <div>
-                            <label className="block text-sm font-medium text-slate-700 mb-2">Tanggal Pengumuman</label>
-                            <input
-                                type="text"
-                                name="tanggal_pengumuman"
-                                value={schedule.tanggal_pengumuman}
-                                onChange={handleChange}
-                                placeholder="Contoh: 07 Feb 2026"
-                                className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
-                            />
-                        </div>
-
-                        <div>
-                            <label className="block text-sm font-medium text-slate-700 mb-2">Tanggal Daftar Ulang</label>
-                            <input
-                                type="text"
-                                name="tanggal_daftar_ulang"
-                                value={schedule.tanggal_daftar_ulang}
-                                onChange={handleChange}
-                                placeholder="Contoh: 14 Feb 2026"
-                                className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
-                            />
-                        </div>
-
-                        <div className="pt-4">
+                        <div className="pt-4 flex justify-end">
                             <button
                                 type="submit"
                                 disabled={saving}

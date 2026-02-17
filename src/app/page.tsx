@@ -7,11 +7,20 @@ import { doc, getDoc } from 'firebase/firestore';
 import RegistrationForm from '@/components/RegistrationForm';
 
 export default function Home() {
+  const [activeTab, setActiveTab] = React.useState<'gelombang1' | 'gelombang2'>('gelombang1');
   const [schedule, setSchedule] = React.useState({
-    pendaftaran: "01 Okt 2025 - 30 Jan 2026",
-    tes: "31 Jan 2026",
-    pengumuman: "07 Feb 2026",
-    daftarUlang: "14 Feb 2026"
+    gelombang1: {
+      pendaftaran: "01 Okt 2025 - 30 Jan 2026",
+      tes: "31 Jan 2026",
+      pengumuman: "07 Feb 2026",
+      daftarUlang: "14 Feb 2026"
+    },
+    gelombang2: {
+      pendaftaran: "01 Feb 2026 - 30 Mar 2026",
+      tes: "05 Apr 2026",
+      pengumuman: "12 Apr 2026",
+      daftarUlang: "19 Apr 2026"
+    }
   });
 
   React.useEffect(() => {
@@ -22,10 +31,18 @@ export default function Home() {
         if (docSnap.exists()) {
           const data = docSnap.data();
           setSchedule({
-            pendaftaran: data.tanggal_pendaftaran || "01 Okt 2025 - 30 Jan 2026",
-            tes: data.tanggal_tes || "31 Jan 2026",
-            pengumuman: data.tanggal_pengumuman || "07 Feb 2026",
-            daftarUlang: data.tanggal_daftar_ulang || "14 Feb 2026"
+            gelombang1: {
+              pendaftaran: data.gelombang1?.pendaftaran || data.tanggal_pendaftaran || "01 Okt 2025 - 30 Jan 2026",
+              tes: data.gelombang1?.tes || data.tanggal_tes || "31 Jan 2026",
+              pengumuman: data.gelombang1?.pengumuman || data.tanggal_pengumuman || "07 Feb 2026",
+              daftarUlang: data.gelombang1?.daftar_ulang || data.tanggal_daftar_ulang || "14 Feb 2026"
+            },
+            gelombang2: {
+              pendaftaran: data.gelombang2?.pendaftaran || "01 Feb 2026 - 30 Mar 2026",
+              tes: data.gelombang2?.tes || "05 Apr 2026",
+              pengumuman: data.gelombang2?.pengumuman || "12 Apr 2026",
+              daftarUlang: data.gelombang2?.daftar_ulang || "19 Apr 2026"
+            }
           });
         }
       } catch (error) {
@@ -332,19 +349,44 @@ export default function Home() {
 
             {/* Jadwal Card */}
             <div className="bg-white p-8 md:p-10 rounded-3xl shadow-[0_10px_30px_rgba(0,0,0,0.05)] border border-slate-100 h-full flex flex-col">
-              <h3 className="text-3xl font-bold text-emerald-800 mb-8 flex items-center gap-3">
-                <span className="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-2xl shadow-sm">🗓️</span>
-                Jadwal Pendaftaran
-              </h3>
+              <div className="flex items-center justify-between mb-8">
+                <h3 className="text-3xl font-bold text-emerald-800 flex items-center gap-3">
+                  <span className="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-2xl shadow-sm">🗓️</span>
+                  Jadwal
+                </h3>
+              </div>
+
+              {/* Tabs */}
+              <div className="flex p-1 bg-slate-100 rounded-xl mb-8 relative">
+                <button
+                  onClick={() => setActiveTab('gelombang1')}
+                  className={`flex-1 py-2 text-sm font-bold rounded-lg transition-all duration-300 ${activeTab === 'gelombang1'
+                      ? 'bg-emerald-600 text-white shadow-md'
+                      : 'text-slate-500 hover:text-emerald-600'
+                    }`}
+                >
+                  Gelombang 1
+                </button>
+                <button
+                  onClick={() => setActiveTab('gelombang2')}
+                  className={`flex-1 py-2 text-sm font-bold rounded-lg transition-all duration-300 ${activeTab === 'gelombang2'
+                      ? 'bg-emerald-600 text-white shadow-md'
+                      : 'text-slate-500 hover:text-emerald-600'
+                    }`}
+                >
+                  Gelombang 2
+                </button>
+              </div>
+
               <div className="space-y-8 relative flex-grow">
                 {/* Connecting Line */}
                 <div className="absolute left-[27px] top-3 bottom-3 w-0.5 bg-slate-200"></div>
 
                 {[
-                  { title: "Pendaftaran", date: schedule.pendaftaran, desc: "Gelombang 1 dibuka secara online & offline" },
-                  { title: "Tes Seleksi", date: schedule.tes, desc: "Tes Akademik, BTQ, dan Wawancara" },
-                  { title: "Pengumuman", date: schedule.pengumuman, desc: "Hasil seleksi diumumkan via Website/WA" },
-                  { title: "Daftar Ulang", date: schedule.daftarUlang, desc: "Penyelesaian administrasi siswa baru" },
+                  { title: "Pendaftaran", date: schedule[activeTab].pendaftaran, desc: "Dibuka secara online & offline" },
+                  { title: "Tes Seleksi", date: schedule[activeTab].tes, desc: "Tes Akademik, BTQ, dan Wawancara" },
+                  { title: "Pengumuman", date: schedule[activeTab].pengumuman, desc: "Hasil seleksi diumumkan via Website/WA" },
+                  { title: "Daftar Ulang", date: schedule[activeTab].daftarUlang, desc: "Penyelesaian administrasi siswa baru" },
                 ].map((item, idx) => (
                   <div key={idx} className="relative pl-14 group">
                     <div className="absolute left-[19px] top-1.5 w-4 h-4 rounded-full bg-white border-4 border-emerald-400 shadow-sm z-10 group-hover:scale-125 group-hover:border-emerald-500 transition-all duration-300"></div>
