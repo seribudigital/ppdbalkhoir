@@ -110,6 +110,33 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Hero Tagline Banner */}
+      <div className="bg-emerald-900 text-white py-6 px-4 relative z-20 shadow-lg">
+        <div className="container mx-auto text-center">
+          <p className="text-sm md:text-lg font-bold tracking-widest uppercase flex flex-wrap justify-center gap-4 md:gap-8">
+            <span>✨ Unggul Budi Pekerti</span>
+            <span className="hidden md:inline text-emerald-500">|</span>
+            <span>✨ Optimal Prestasi</span>
+            <span className="hidden md:inline text-emerald-500">|</span>
+            <span>✨ Bertauhid Sejak Dini</span>
+            <span className="hidden md:inline text-emerald-500">|</span>
+            <span>✨ Hidupkan Sunnah Nabi</span>
+          </p>
+        </div>
+      </div>
+
+      {/* Section: Latar Belakang */}
+      <section className="py-20 px-6 bg-white">
+        <div className="container mx-auto max-w-4xl text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-emerald-800 mb-8">Latar Belakang</h2>
+          <div className="bg-slate-50 p-8 md:p-12 rounded-3xl border border-slate-100 shadow-sm">
+            <p className="text-lg text-slate-700 leading-relaxed">
+              "Sekolah Menengah Pertama Islam Terpadu Al-Khoir Islamic School Bin Baz 5 merupakan lembaga pendidikan yang memadukan model pendidikan ala pesantren salaf dengan kurikulum modern. Mengadopsi dari sistem pembelajaran yang diterapkan di Islamic Centre Bin Baz Yogyakarta, diharapkan Al Khoir Boarding School ini bisa melahirkan generasi robbani yang senantiasa berpegang pada ajaran-ajaran Al-Qur'an dan Sunnah Rasulullah Shallallahu 'alaihi wasallam."
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Section 1: Visi & Keunggulan */}
       <section className="py-20 px-6 bg-slate-50 relative overflow-hidden">
         {/* Background Elements */}
@@ -149,15 +176,18 @@ export default function Home() {
               <h3 className="text-2xl font-bold mb-6">Target Unggulan</h3>
               <ul className="space-y-4">
                 {[
-                  "Hafal minimal 10 Juz Al-Qur'an",
-                  "Hafal Hadits Arba'in",
+                  "Memiliki aqidah yang shahihah & bertaqwa kepada Allah",
+                  "Mampu membaca Al Qur'an dengan tartil dan hafal minimal 10 juz",
+                  "Hafal hadits Arba'in Nawawiyah",
                   "Menguasai dasar-dasar ilmu syar'i",
-                  "Berbahasa Arab & Inggris",
-                  "Memiliki akhlakul karimah"
+                  "Memiliki akhlak mulia dan adab Islam",
+                  "Memiliki kepedulian sosial dan lingkungan",
+                  "Mahir berbahasa Arab lisan maupun tulisan",
+                  "Memiliki kemandirian dan suka berdakwah"
                 ].map((item, idx) => (
                   <li key={idx} className="flex items-start gap-3">
-                    <span className="bg-emerald-400/30 rounded-full p-1 mt-0.5"><svg className="w-3 h-3 text-emerald-100" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg></span>
-                    <span className="text-emerald-50 font-medium">{item}</span>
+                    <span className="bg-emerald-400/30 rounded-full p-1 mt-0.5 min-w-[20px] h-[20px] flex items-center justify-center"><svg className="w-3 h-3 text-emerald-100" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg></span>
+                    <span className="text-emerald-50 font-medium text-sm md:text-base">{item}</span>
                   </li>
                 ))}
               </ul>
@@ -182,6 +212,76 @@ export default function Home() {
                 ))}
               </div>
             </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section: Kurikulum & Pengajar */}
+      <section className="py-20 px-6 bg-emerald-50 relative overflow-hidden">
+        <div className="container mx-auto relative z-10">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-emerald-800 mb-4">Kurikulum & Pengajar</h2>
+            <div className="h-1.5 w-24 bg-gradient-to-r from-emerald-500 to-cyan-500 mx-auto rounded-full"></div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Card 1: Kurikulum Diniyyah */}
+            <motion.div whileHover={{ y: -5 }} className="bg-white p-8 rounded-3xl shadow-sm border border-emerald-100 hover:shadow-md transition-all">
+              <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mb-6 text-2xl">📖</div>
+              <h3 className="text-xl font-bold text-emerald-900 mb-4">Kurikulum Diniyyah</h3>
+              <p className="text-slate-600 leading-relaxed">
+                Pelajaran Tahfidz, Al-Qur'an, Akidah Akhlak, Adab Islam, Fikih, Hadits, Tarikh Islam, Manhaj, Muhadatsah, Nahwu, Shorof, Imla' wa Khot, Qiro'ah dan Tahsin.
+              </p>
+            </motion.div>
+
+            {/* Card 2: Kurikulum Umum */}
+            <motion.div whileHover={{ y: -5 }} className="bg-white p-8 rounded-3xl shadow-sm border border-emerald-100 hover:shadow-md transition-all">
+              <div className="w-12 h-12 bg-cyan-100 rounded-xl flex items-center justify-center mb-6 text-2xl">📚</div>
+              <h3 className="text-xl font-bold text-emerald-900 mb-4">Kurikulum Umum</h3>
+              <p className="text-slate-600 leading-relaxed">
+                Matematika, IPA, IPS, PKN, B. Indonesia, B. Inggris, Ilmu Komputer dan Pendidikan Pancasila.
+              </p>
+            </motion.div>
+
+            {/* Card 3: Tenaga Pengajar */}
+            <motion.div whileHover={{ y: -5 }} className="bg-white p-8 rounded-3xl shadow-sm border border-emerald-100 hover:shadow-md transition-all">
+              <div className="w-12 h-12 bg-emerald-600 text-white rounded-xl flex items-center justify-center mb-6 text-2xl">👨‍🏫</div>
+              <h3 className="text-xl font-bold text-emerald-900 mb-4">Tenaga Pengajar</h3>
+              <p className="text-slate-600 leading-relaxed">
+                Para Alumni Perguruan tinggi dalam negeri maupun luar negeri, Universitas Negeri maupun Swasta, Alumni Pondok Pesantren serta Tenaga Pengajar khusus Tahfidz Al-Qur'an.
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section: Prestasi Kami */}
+      <section className="py-20 px-6 bg-white">
+        <div className="container mx-auto max-w-5xl">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-emerald-800 mb-4">Prestasi Kami</h2>
+            <div className="h-1.5 w-24 bg-gradient-to-r from-emerald-500 to-cyan-500 mx-auto rounded-full"></div>
+            <p className="mt-4 text-emerald-600/80 text-lg">Bukti nyata kualitas pendidikan kami.</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              "Juara 1 Pidato Bahasa Indonesia Tingkat Kabupaten",
+              "Juara 2 Musabaqoh Hifdzil Mutun",
+              "Juara 1 Pingpong KSM",
+              "Finalis Hifdzul Mutun Tingkat Provinsi",
+              "Juara 1 Tahfidz Tingkat Provinsi",
+              "Juara 2 Olimpiade Cipta Puisi Tingkat Nasional"
+            ].map((prestasi, idx) => (
+              <div key={idx} className="flex items-center gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-100 hover:border-emerald-200 transition-colors">
+                <div className="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center text-xl shadow-sm flex-shrink-0">🏆</div>
+                <span className="text-slate-700 font-medium">{prestasi}</span>
+              </div>
+            ))}
+            <div className="flex items-center gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-100 hover:border-emerald-200 transition-colors">
+              <div className="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center text-xl shadow-sm flex-shrink-0">✨</div>
+              <span className="text-slate-700 font-medium italic">Dan masih banyak lagi...</span>
+            </div>
           </div>
         </div>
       </section>
@@ -221,92 +321,103 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Section 3: Rincian Biaya */}
+      {/* Section 3: Rincian Biaya (Table Version) */}
       <section className="py-24 px-6 bg-slate-50 relative">
         <div className="container mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-emerald-800 mb-4">Rincian Biaya Pendidikan</h2>
             <p className="text-emerald-600/80 text-lg">Investasi terbaik untuk masa depan buah hati Anda.</p>
+            <div className="mt-6 inline-block bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-6 py-2 rounded-full font-bold shadow-lg transform hover:scale-105 transition-transform">
+              🔥 Ada Diskon Khusus untuk Alumni!
+            </div>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {/* ASRAMA Card */}
-            <div className="bg-white rounded-3xl shadow-[0_10px_40px_rgba(16,185,129,0.1)] border border-emerald-100 overflow-hidden transform hover:-translate-y-2 transition-transform duration-500 relative">
-              <div className="bg-emerald-600 p-6 text-center text-white relative overflow-hidden">
-                <div className="absolute inset-0 bg-[url('/pattern.png')] opacity-10"></div>
-                <h3 className="text-2xl font-bold relative z-10">Program ASRAMA</h3>
-                <p className="opacity-90 relative z-10">Boarding School</p>
-              </div>
-              <div className="p-8">
-                <div className="mb-8">
-                  <p className="text-sm text-slate-500 uppercase font-bold tracking-wider mb-2">Biaya Pendaftaran</p>
-                  <p className="text-3xl font-bold text-slate-800">Rp 250.000</p>
+          <div className="max-w-5xl mx-auto bg-white rounded-3xl shadow-xl overflow-hidden border border-emerald-100">
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="bg-emerald-600 text-white">
+                    <th className="p-5 font-bold text-lg border-b border-emerald-500 sticky left-0 z-10 bg-emerald-600">URAIAN BIAYA</th>
+                    <th className="p-5 font-bold text-lg border-b border-emerald-500 text-center">ASRAMA</th>
+                    <th className="p-5 font-bold text-lg border-b border-emerald-500 text-center">NON ASRAMA</th>
+                  </tr>
+                </thead>
+                <tbody className="text-slate-700">
+                  <tr className="hover:bg-emerald-50/50 transition-colors border-b border-slate-100">
+                    <td className="p-5 font-medium sticky left-0 z-10 bg-white">Pendaftaran</td>
+                    <td className="p-5 text-center font-bold text-emerald-700">Rp 250.000</td>
+                    <td className="p-5 text-center font-bold text-emerald-700">Rp 250.000</td>
+                  </tr>
+                  <tr className="hover:bg-emerald-50/50 transition-colors border-b border-slate-100 bg-slate-50/50">
+                    <td className="p-5 font-medium sticky left-0 z-10 bg-slate-50">Perlengkapan</td>
+                    <td className="p-5 text-center font-bold text-emerald-700">Rp 2.700.000</td>
+                    <td className="p-5 text-center text-slate-400">-</td>
+                  </tr>
+                  <tr className="hover:bg-emerald-50/50 transition-colors border-b border-slate-100">
+                    <td className="p-5 font-medium sticky left-0 z-10 bg-white">SPP Bulanan</td>
+                    <td className="p-5 text-center font-bold text-emerald-700">Rp 1.000.000</td>
+                    <td className="p-5 text-center font-bold text-emerald-700">Rp 200.000</td>
+                  </tr>
+                  <tr className="hover:bg-emerald-50/50 transition-colors border-b border-slate-100 bg-slate-50/50">
+                    <td className="p-5 font-medium sticky left-0 z-10 bg-slate-50">Bangunan</td>
+                    <td className="p-5 text-center font-bold text-emerald-700">Rp 3.000.000</td>
+                    <td className="p-5 text-center font-bold text-emerald-700">Rp 1.500.000</td>
+                  </tr>
+                  <tr className="hover:bg-emerald-50/50 transition-colors border-b border-slate-100">
+                    <td className="p-5 font-medium sticky left-0 z-10 bg-white">Seragam Putra</td>
+                    <td className="p-5 text-center font-bold text-emerald-700">Rp 1.500.000</td>
+                    <td className="p-5 text-center font-bold text-emerald-700">Rp 1.500.000</td>
+                  </tr>
+                  <tr className="hover:bg-emerald-50/50 transition-colors border-b border-slate-100 bg-slate-50/50">
+                    <td className="p-5 font-medium sticky left-0 z-10 bg-slate-50">Seragam Putri</td>
+                    <td className="p-5 text-center font-bold text-emerald-700">Rp 1.700.000</td>
+                    <td className="p-5 text-center font-bold text-emerald-700">Rp 1.700.000</td>
+                  </tr>
+                  <tr className="hover:bg-emerald-50/50 transition-colors border-b border-slate-100">
+                    <td className="p-5 font-medium sticky left-0 z-10 bg-white">Buku/Tahun</td>
+                    <td className="p-5 text-center font-bold text-emerald-700">Rp 800.000</td>
+                    <td className="p-5 text-center font-bold text-emerald-700">Rp 800.000</td>
+                  </tr>
+                  <tr className="hover:bg-emerald-50/50 transition-colors border-b border-slate-100 bg-slate-50/50">
+                    <td className="p-5 font-medium sticky left-0 z-10 bg-slate-50">Ekskul+OSIS/Tahun</td>
+                    <td className="p-5 text-center font-bold text-emerald-700">Rp 200.000</td>
+                    <td className="p-5 text-center font-bold text-emerald-700">Rp 200.000</td>
+                  </tr>
+                  <tr className="hover:bg-emerald-50/50 transition-colors border-b border-slate-100">
+                    <td className="p-5 font-medium sticky left-0 z-10 bg-white">Buku Raport</td>
+                    <td className="p-5 text-center font-bold text-emerald-700">Rp 100.000</td>
+                    <td className="p-5 text-center font-bold text-emerald-700">Rp 100.000</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div className="p-6 bg-slate-50 border-t border-slate-200">
+              <div className="grid md:grid-cols-2 gap-8">
+                <div className="space-y-2 text-sm text-slate-600">
+                  <p className="flex items-start gap-2"><span className="text-emerald-500 font-bold">*</span> SPP Asrama Include makan 3X sehari, Laundry, dan P3K</p>
+                  <p className="flex items-start gap-2"><span className="text-emerald-500 font-bold">*</span> Perlengkapan Asrama meliputi Kasur Inoac, Dipan, dan Almari</p>
+                  <p className="flex items-start gap-2"><span className="text-emerald-500 font-bold">*</span> Administrasi Perlengkapan, Bangunan, dan Seragam wajib ditunaikan di awal tahun</p>
                 </div>
 
-                <div className="space-y-4 mb-8">
-                  <div className="flex justify-between items-center border-b border-slate-100 pb-3">
-                    <span className="text-slate-600">Total Putra</span>
-                    <span className="font-bold text-emerald-700 text-lg">Rp 9.550.000</span>
-                  </div>
-                  <div className="flex justify-between items-center border-b border-slate-100 pb-3">
-                    <span className="text-slate-600">Total Putri</span>
-                    <span className="font-bold text-emerald-700 text-lg">Rp 9.750.000</span>
-                  </div>
-                  <div className="bg-emerald-50 p-4 rounded-xl mt-4">
-                    <div className="flex justify-between items-center mb-1">
-                      <span className="text-emerald-900 font-bold">SPP Bulanan</span>
-                      <span className="text-emerald-700 font-bold">Rp 1.000.000</span>
+                <div className="space-y-4">
+                  <div className="bg-emerald-100 p-4 rounded-xl border border-emerald-200">
+                    <h4 className="font-bold text-emerald-800 mb-2">Total Biaya Asrama</h4>
+                    <div className="flex justify-between text-sm md:text-base">
+                      <span>Putra: <span className="font-bold">Rp 9.550.000,-</span></span>
+                      <span>Putri: <span className="font-bold">Rp 9.750.000,-</span></span>
                     </div>
-                    <p className="text-xs text-emerald-600 mt-1 flex items-center gap-1">
-                      <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
-                      Include makan 3x, laundry, P3K
-                    </p>
+                  </div>
+                  <div className="bg-cyan-100 p-4 rounded-xl border border-cyan-200">
+                    <h4 className="font-bold text-cyan-800 mb-2">Total Non Asrama</h4>
+                    <div className="flex justify-between text-sm md:text-base">
+                      <span>Putra: <span className="font-bold">Rp 4.550.000,-</span></span>
+                      <span>Putri: <span className="font-bold">Rp 4.750.000,-</span></span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-
-            {/* NON-ASRAMA Card */}
-            <div className="bg-white rounded-3xl shadow-[0_10px_40px_rgba(6,182,212,0.1)] border border-cyan-100 overflow-hidden transform hover:-translate-y-2 transition-transform duration-500 relative">
-              <div className="bg-cyan-600 p-6 text-center text-white relative overflow-hidden">
-                <div className="absolute inset-0 bg-[url('/pattern.png')] opacity-10"></div>
-                <h3 className="text-2xl font-bold relative z-10">Program NON-ASRAMA</h3>
-                <p className="opacity-90 relative z-10">Full Day School</p>
-              </div>
-              <div className="p-8">
-                <div className="mb-8">
-                  <p className="text-sm text-slate-500 uppercase font-bold tracking-wider mb-2">Biaya Pendaftaran</p>
-                  <p className="text-3xl font-bold text-slate-800">Rp 250.000</p>
-                </div>
-
-                <div className="space-y-4 mb-8">
-                  <div className="flex justify-between items-center border-b border-slate-100 pb-3">
-                    <span className="text-slate-600">Total Putra</span>
-                    <span className="font-bold text-cyan-700 text-lg">Rp 4.550.000</span>
-                  </div>
-                  <div className="flex justify-between items-center border-b border-slate-100 pb-3">
-                    <span className="text-slate-600">Total Putri</span>
-                    <span className="font-bold text-cyan-700 text-lg">Rp 4.750.000</span>
-                  </div>
-                  <div className="bg-cyan-50 p-4 rounded-xl mt-4">
-                    <div className="flex justify-between items-center mb-1">
-                      <span className="text-cyan-900 font-bold">SPP Bulanan</span>
-                      <span className="text-cyan-700 font-bold">Rp 200.000</span>
-                    </div>
-                    <p className="text-xs text-cyan-600 mt-1 flex items-center gap-1">
-                      <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                      Biaya pendidikan reguler
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-10 text-center">
-            <p className="text-slate-500 text-sm max-w-2xl mx-auto bg-white py-3 px-6 rounded-full inline-block shadow-sm border border-slate-200">
-              <span className="font-bold text-emerald-600">*Catatan:</span> Biaya total di atas sudah meliputi Bangunan, Seragam, Buku/Tahun, Ekskul, dan Raport. <span className="text-emerald-600 font-semibold">Ada diskon khusus untuk alumni.</span>
-            </p>
           </div>
         </div>
       </section>
@@ -361,8 +472,8 @@ export default function Home() {
                 <button
                   onClick={() => setActiveTab('gelombang1')}
                   className={`flex-1 py-2 text-sm font-bold rounded-lg transition-all duration-300 ${activeTab === 'gelombang1'
-                      ? 'bg-emerald-600 text-white shadow-md'
-                      : 'text-slate-500 hover:text-emerald-600'
+                    ? 'bg-emerald-600 text-white shadow-md'
+                    : 'text-slate-500 hover:text-emerald-600'
                     }`}
                 >
                   Gelombang 1
@@ -370,8 +481,8 @@ export default function Home() {
                 <button
                   onClick={() => setActiveTab('gelombang2')}
                   className={`flex-1 py-2 text-sm font-bold rounded-lg transition-all duration-300 ${activeTab === 'gelombang2'
-                      ? 'bg-emerald-600 text-white shadow-md'
-                      : 'text-slate-500 hover:text-emerald-600'
+                    ? 'bg-emerald-600 text-white shadow-md'
+                    : 'text-slate-500 hover:text-emerald-600'
                     }`}
                 >
                   Gelombang 2
@@ -434,6 +545,20 @@ export default function Home() {
                       <WhatsAppButton number="6289522999229" name="Ust. M. Kholil" role="0895-2299-9229" color="cyan" />
                     </div>
                   </div>
+
+                  <div className="mt-4 pt-4 border-t border-emerald-100">
+                    <div className="flex items-start gap-4">
+                      <div className="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 shrink-0 mt-1">
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-emerald-900">Lokasi Pendaftaran (Kampus AIS)</h4>
+                        <p className="text-slate-600 text-sm mt-1 leading-relaxed">
+                          Jl. Cikande Permai Blok T9 Cikande, Serang, Banten
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -464,7 +589,7 @@ export default function Home() {
           </Link>
         </div>
       </footer>
-    </main>
+    </main >
   );
 }
 
