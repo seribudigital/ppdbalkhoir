@@ -1,9 +1,40 @@
 "use client";
 import React from 'react';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
+import { db } from '@/lib/firebase/config';
+import { doc, getDoc } from 'firebase/firestore';
 import RegistrationForm from '@/components/RegistrationForm';
 
 export default function Home() {
+  const [schedule, setSchedule] = React.useState({
+    pendaftaran: "01 Okt 2025 - 30 Jan 2026",
+    tes: "31 Jan 2026",
+    pengumuman: "07 Feb 2026",
+    daftarUlang: "14 Feb 2026"
+  });
+
+  React.useEffect(() => {
+    const fetchSchedule = async () => {
+      try {
+        const docRef = doc(db, "settings", "jadwal");
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          setSchedule({
+            pendaftaran: data.tanggal_pendaftaran || "01 Okt 2025 - 30 Jan 2026",
+            tes: data.tanggal_tes || "31 Jan 2026",
+            pengumuman: data.tanggal_pengumuman || "07 Feb 2026",
+            daftarUlang: data.tanggal_daftar_ulang || "14 Feb 2026"
+          });
+        }
+      } catch (error) {
+        console.error("Error fetching schedule:", error);
+      }
+    };
+    fetchSchedule();
+  }, []);
+
   const scrollToForm = () => {
     const element = document.getElementById('form-section');
     if (element) {
@@ -310,10 +341,10 @@ export default function Home() {
                 <div className="absolute left-[27px] top-3 bottom-3 w-0.5 bg-slate-200"></div>
 
                 {[
-                  { title: "Pendaftaran", date: "01 Okt 2025 - 30 Jan 2026", desc: "Gelombang 1 dibuka secara online & offline" },
-                  { title: "Tes Seleksi", date: "31 Jan 2026", desc: "Tes Akademik, BTQ, dan Wawancara" },
-                  { title: "Pengumuman", date: "07 Feb 2026", desc: "Hasil seleksi diumumkan via Website/WA" },
-                  { title: "Daftar Ulang", date: "14 Feb 2026", desc: "Penyelesaian administrasi siswa baru" },
+                  { title: "Pendaftaran", date: schedule.pendaftaran, desc: "Gelombang 1 dibuka secara online & offline" },
+                  { title: "Tes Seleksi", date: schedule.tes, desc: "Tes Akademik, BTQ, dan Wawancara" },
+                  { title: "Pengumuman", date: schedule.pengumuman, desc: "Hasil seleksi diumumkan via Website/WA" },
+                  { title: "Daftar Ulang", date: schedule.daftarUlang, desc: "Penyelesaian administrasi siswa baru" },
                 ].map((item, idx) => (
                   <div key={idx} className="relative pl-14 group">
                     <div className="absolute left-[19px] top-1.5 w-4 h-4 rounded-full bg-white border-4 border-emerald-400 shadow-sm z-10 group-hover:scale-125 group-hover:border-emerald-500 transition-all duration-300"></div>
@@ -349,6 +380,8 @@ export default function Home() {
                     </div>
                   </div>
 
+
+
                   <div className="bg-cyan-50/50 p-6 rounded-2xl border border-cyan-100 hover:border-cyan-300 transition-colors duration-300">
                     <h4 className="font-bold text-cyan-900 border-b border-cyan-200 pb-3 mb-4 flex items-center gap-3">
                       <img src="https://hujtpnndfhnxddglztdn.supabase.co/storage/v1/object/public/seribudigital/ma.webp" alt="MA Logo" className="w-8 h-8 object-contain" />
@@ -380,6 +413,15 @@ export default function Home() {
         </div>
       </div>
 
+      {/* Simple Footer */}
+      <footer className="bg-slate-900 text-slate-500 py-8 text-center text-sm">
+        <div className="container mx-auto px-6">
+          <p className="mb-4">&copy; {new Date().getFullYear()} Al-Khoir Islamic School Bin Baz 5. All rights reserved.</p>
+          <Link href="/admin" className="text-slate-700 hover:text-slate-400 transition-colors text-xs">
+            Login Admin
+          </Link>
+        </div>
+      </footer>
     </main>
   );
 }

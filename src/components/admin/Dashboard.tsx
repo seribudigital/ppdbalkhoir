@@ -4,6 +4,7 @@ import type { User } from 'firebase/auth';
 import { logout } from '@/lib/firebase/auth';
 import { ambilSemuaPendaftar, PendaftarData, updatePendaftar } from '@/lib/firebase/pendaftar';
 import * as XLSX from 'xlsx';
+import Sidebar from './Sidebar';
 
 interface DashboardProps {
     user: User;
@@ -78,38 +79,7 @@ export default function Dashboard({ user }: DashboardProps) {
     return (
         <div className="min-h-screen bg-slate-50 flex flex-col md:flex-row">
             {/* Sidebar */}
-            <aside className="w-full md:w-64 bg-emerald-900 text-white p-6 flex flex-col justify-between">
-                <div>
-                    <div className="flex items-center gap-3 mb-10">
-                        <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center text-2xl">⚡</div>
-                        <div>
-                            <h1 className="font-bold text-lg leading-tight">Admin PPDB</h1>
-                            <p className="text-emerald-400 text-xs text-wrap">Al-Khoir Islamic School Bin Baz 5</p>
-                        </div>
-                    </div>
-
-                    <nav className="space-y-2">
-                        <button className="w-full text-left px-4 py-3 bg-emerald-800/50 rounded-lg text-emerald-50 font-medium border-l-4 border-cyan-400">
-                            Data Pendaftar
-                        </button>
-                        <button className="w-full text-left px-4 py-3 hover:bg-emerald-800/30 rounded-lg text-emerald-300 font-medium transition">
-                            Pengaturan
-                        </button>
-                    </nav>
-                </div>
-
-                <div>
-                    <div className="mb-4 text-xs text-emerald-500">
-                        Login sebagai: <br />  <span className="text-white font-medium truncate block">{user.email}</span>
-                    </div>
-                    <button
-                        onClick={handleLogout}
-                        className="w-full py-2 bg-red-600/20 text-red-300 hover:bg-red-600 hover:text-white rounded-lg transition text-sm font-semibold flex items-center justify-center gap-2"
-                    >
-                        Keluar
-                    </button>
-                </div>
-            </aside>
+            <Sidebar user={user} />
 
             {/* Main Content */}
             <main className="flex-1 p-6 md:p-10 overflow-x-auto">
