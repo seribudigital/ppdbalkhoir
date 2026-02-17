@@ -16,49 +16,56 @@ interface InputFieldProps {
     options?: string[];
 }
 
-const InputField = ({ label, name, value, onChange, type = "text", placeholder, required = true, isTextArea = false, options = [] }: InputFieldProps) => (
-    <div className="space-y-1">
-        <label className="block text-emerald-800 font-semibold text-sm">
-            {label} {required && <span className="text-red-500">*</span>}
-        </label>
-        {isTextArea ? (
-            <textarea
-                name={name}
-                value={value || ''}
-                onChange={onChange}
-                placeholder={placeholder}
-                className="w-full px-4 py-3 rounded-xl border border-emerald-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none transition bg-emerald-50/30 text-emerald-900"
-                rows={3}
-            />
-        ) : options.length > 0 ? (
-            <div className="relative">
-                <select
+const InputField = ({ label, name, value, onChange, type = "text", placeholder, required = true, isTextArea = false, options = [] }: InputFieldProps) => {
+    const inputId = name; // Use name as ID since it's unique in this form
+
+    return (
+        <div className="space-y-1">
+            <label htmlFor={inputId} className="block text-emerald-800 font-semibold text-sm">
+                {label} {required && <span className="text-red-500">*</span>}
+            </label>
+            {isTextArea ? (
+                <textarea
+                    id={inputId}
                     name={name}
                     value={value || ''}
                     onChange={onChange}
-                    className="w-full px-4 py-3 rounded-xl border border-emerald-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none transition bg-emerald-50/30 appearance-none text-emerald-900 cursor-pointer"
-                >
-                    <option value="">-- Pilih {label} --</option>
-                    {options.map((opt: string) => (
-                        <option key={opt} value={opt}>{opt}</option>
-                    ))}
-                </select>
-                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-emerald-600">
-                    <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
+                    placeholder={placeholder}
+                    className="w-full px-4 py-3 rounded-xl border border-emerald-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none transition bg-emerald-50/30 text-emerald-900"
+                    rows={3}
+                />
+            ) : options.length > 0 ? (
+                <div className="relative">
+                    <select
+                        id={inputId}
+                        name={name}
+                        value={value || ''}
+                        onChange={onChange}
+                        className="w-full px-4 py-3 rounded-xl border border-emerald-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none transition bg-emerald-50/30 appearance-none text-emerald-900 cursor-pointer"
+                    >
+                        <option value="">-- Pilih {label} --</option>
+                        {options.map((opt: string) => (
+                            <option key={opt} value={opt}>{opt}</option>
+                        ))}
+                    </select>
+                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-emerald-600">
+                        <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
+                    </div>
                 </div>
-            </div>
-        ) : (
-            <input
-                type={type}
-                name={name}
-                value={value || ''}
-                onChange={onChange}
-                placeholder={placeholder}
-                className="w-full px-4 py-3 rounded-xl border border-emerald-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none transition bg-emerald-50/30 text-emerald-900"
-            />
-        )}
-    </div>
-);
+            ) : (
+                <input
+                    id={inputId}
+                    type={type}
+                    name={name}
+                    value={value || ''}
+                    onChange={onChange}
+                    placeholder={placeholder}
+                    className="w-full px-4 py-3 rounded-xl border border-emerald-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none transition bg-emerald-50/30 text-emerald-900"
+                />
+            )}
+        </div>
+    );
+};
 
 export default function RegistrationForm() {
     const [step, setStep] = useState(1);

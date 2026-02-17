@@ -203,14 +203,14 @@ export default function Home() {
 
                 <div className="space-y-4">
                   <div className="bg-emerald-100 p-4 rounded-xl border border-emerald-200">
-                    <h4 className="font-bold text-emerald-800 mb-2">Total Biaya Asrama</h4>
+                    <h3 className="font-bold text-emerald-800 mb-2">Total Biaya Asrama</h3>
                     <div className="flex justify-between text-sm md:text-base">
                       <span>Putra: <span className="font-bold">Rp 9.550.000,-</span></span>
                       <span>Putri: <span className="font-bold">Rp 9.750.000,-</span></span>
                     </div>
                   </div>
                   <div className="bg-cyan-100 p-4 rounded-xl border border-cyan-200">
-                    <h4 className="font-bold text-cyan-800 mb-2">Total Non Asrama</h4>
+                    <h3 className="font-bold text-cyan-800 mb-2">Total Non Asrama</h3>
                     <div className="flex justify-between text-sm md:text-base">
                       <span>Putra: <span className="font-bold">Rp 4.550.000,-</span></span>
                       <span>Putri: <span className="font-bold">Rp 4.750.000,-</span></span>
