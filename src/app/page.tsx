@@ -19,6 +19,9 @@ const ScheduleSection = dynamic(() => import('@/components/home/ScheduleSection'
 const RegistrationForm = dynamic(() => import('@/components/RegistrationForm'), {
   loading: () => <div className="min-h-[800px] flex items-center justify-center bg-slate-100 text-slate-400 rounded-3xl">Loading Form...</div>
 });
+const LocationSection = dynamic(() => import('@/components/home/LocationSection'), {
+  loading: () => <div className="min-h-[400px] flex items-center justify-center bg-slate-50 text-slate-400">Loading Map...</div>
+});
 
 export default function Home() {
   return (
@@ -283,6 +286,8 @@ export default function Home() {
           <RegistrationForm />
         </div>
       </div>
+
+      <LocationSection />
 
       {/* Simple Footer - Static (Server Side) */}
       <footer id="kontak" className="bg-slate-900 text-slate-500 py-8 text-center text-sm">
