@@ -14,10 +14,12 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-slate-50 text-emerald-900 font-sans selection:bg-cyan-200 selection:text-emerald-900">
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-emerald-700 via-emerald-600 to-teal-600 text-white">
-        {/* Background Overlay for Depth */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-cyan-500/20 via-transparent to-transparent"></div>
-        <div className="absolute inset-0 bg-[url('/pattern.png')] opacity-5 mix-blend-overlay"></div>
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden text-white">
+        {/* Background Image */}
+        <div className="absolute inset-0 bg-[url('https://hujtpnndfhnxddglztdn.supabase.co/storage/v1/object/public/seribudigital/gedung.jpeg')] bg-cover bg-center"></div>
+        {/* Overlay for Readability */}
+        <div className="absolute inset-0 bg-emerald-900/80 backdrop-blur-[2px]"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-emerald-950 via-transparent to-emerald-950/50"></div>
 
         <div className="container mx-auto px-6 text-center z-10 pt-20">
           <motion.div
@@ -261,6 +263,37 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Section 4: Galeri Kegiatan */}
+      <section className="py-24 px-6 bg-white overflow-hidden">
+        <div className="container mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-emerald-800 mb-4">Galeri Kegiatan</h2>
+            <div className="h-1.5 w-24 bg-gradient-to-r from-emerald-500 to-cyan-500 mx-auto rounded-full"></div>
+            <p className="mt-4 text-emerald-600/80 text-lg">Dokumentasi kegiatan santri dan fasilitas.</p>
+          </div>
+
+          <div className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
+            {[
+              "https://hujtpnndfhnxddglztdn.supabase.co/storage/v1/object/public/seribudigital/gal1.jpeg",
+              "https://hujtpnndfhnxddglztdn.supabase.co/storage/v1/object/public/seribudigital/gal2.jpeg",
+              "https://hujtpnndfhnxddglztdn.supabase.co/storage/v1/object/public/seribudigital/gal3.jpeg",
+              "https://hujtpnndfhnxddglztdn.supabase.co/storage/v1/object/public/seribudigital/gal4.jpeg",
+              "https://hujtpnndfhnxddglztdn.supabase.co/storage/v1/object/public/seribudigital/gal5.jpeg",
+              "https://hujtpnndfhnxddglztdn.supabase.co/storage/v1/object/public/seribudigital/gal6.jpeg",
+              "https://hujtpnndfhnxddglztdn.supabase.co/storage/v1/object/public/seribudigital/gal7.jpeg"
+            ].map((src, idx) => (
+              <motion.div
+                key={idx}
+                whileHover={{ scale: 1.02 }}
+                className="break-inside-avoid rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300"
+              >
+                <img src={src} alt={`Galeri ${idx + 1}`} className="w-full h-auto object-cover" loading="lazy" />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Section 4: Jadwal & Layanan Informasi */}
       <section className="py-24 px-6 bg-gradient-to-b from-white to-emerald-50">
         <div className="container mx-auto">
@@ -306,22 +339,24 @@ export default function Home() {
 
                 <div className="space-y-8 mt-auto">
                   <div className="bg-emerald-50/50 p-6 rounded-2xl border border-emerald-100 hover:border-emerald-300 transition-colors duration-300">
-                    <h4 className="font-bold text-emerald-900 border-b border-emerald-200 pb-3 mb-4 flex items-center gap-2">
-                      <span className="text-xl">🕌</span> Unit MTs
+                    <h4 className="font-bold text-emerald-900 border-b border-emerald-200 pb-3 mb-4 flex items-center gap-3">
+                      <img src="https://hujtpnndfhnxddglztdn.supabase.co/storage/v1/object/public/seribudigital/mts.webp" alt="MTs Logo" className="w-8 h-8 object-contain" />
+                      Unit MTs
                     </h4>
                     <div className="grid gap-4">
-                      <WhatsAppButton number="6282310436764" label="Ust. Amir (0823-1043-6764)" color="emerald" />
-                      <WhatsAppButton number="6281211599501" label="Ust. Suhendra (0812-1159-9501)" color="emerald" />
+                      <WhatsAppButton number="6282310436764" name="Ust. Amir" role="0823-1043-6764" color="emerald" />
+                      <WhatsAppButton number="6281211599501" name="Ust. Suhendra" role="0812-1159-9501" color="emerald" />
                     </div>
                   </div>
 
                   <div className="bg-cyan-50/50 p-6 rounded-2xl border border-cyan-100 hover:border-cyan-300 transition-colors duration-300">
-                    <h4 className="font-bold text-cyan-900 border-b border-cyan-200 pb-3 mb-4 flex items-center gap-2">
-                      <span className="text-xl">🕋</span> Unit MA
+                    <h4 className="font-bold text-cyan-900 border-b border-cyan-200 pb-3 mb-4 flex items-center gap-3">
+                      <img src="https://hujtpnndfhnxddglztdn.supabase.co/storage/v1/object/public/seribudigital/ma.webp" alt="MA Logo" className="w-8 h-8 object-contain" />
+                      Unit MA
                     </h4>
                     <div className="grid gap-4">
-                      <WhatsAppButton number="6282233498861" label="Ust. Darwin (0822-3349-8861)" color="cyan" />
-                      <WhatsAppButton number="6289522999229" label="Ust. M. Kholil (0895-2299-9229)" color="cyan" />
+                      <WhatsAppButton number="6282233498861" name="Ust. Darwin" role="0822-3349-8861" color="cyan" />
+                      <WhatsAppButton number="6289522999229" name="Ust. M. Kholil" role="0895-2299-9229" color="cyan" />
                     </div>
                   </div>
                 </div>
@@ -353,7 +388,7 @@ export default function Home() {
 
 
 
-function WhatsAppButton({ number, label, color = "emerald" }: { number: string, label: string, color?: "emerald" | "cyan" }) {
+function WhatsAppButton({ number, name, role, color = "emerald" }: { number: string, name: string, role: string, color?: "emerald" | "cyan" }) {
   const bgClass = color === "emerald" ? "bg-emerald-600 hover:bg-emerald-700 shadow-emerald-200" : "bg-cyan-600 hover:bg-cyan-700 shadow-cyan-200";
 
   return (
@@ -361,12 +396,17 @@ function WhatsAppButton({ number, label, color = "emerald" }: { number: string, 
       href={`https://wa.me/${number}`}
       target="_blank"
       rel="noopener noreferrer"
-      className={`flex items-center justify-center gap-3 w-full py-4 ${bgClass} text-white rounded-xl transition-all duration-300 font-semibold shadow-lg hover:shadow-xl hover:-translate-y-1`}
+      className={`flex items-center gap-4 w-full p-4 ${bgClass} text-white rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 text-left`}
     >
-      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 16 16">
-        <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z" />
-      </svg>
-      {label}
+      <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z" />
+        </svg>
+      </div>
+      <div className="flex flex-col">
+        <span className="font-bold text-lg leading-tight">{name}</span>
+        <span className="text-sm opacity-90 font-medium">{role}</span>
+      </div>
     </a>
   )
 }
