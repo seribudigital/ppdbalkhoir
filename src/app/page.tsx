@@ -26,16 +26,26 @@ export default function Home() {
       <HeroSection />
 
       {/* Hero Tagline Banner - Static (Server Side) */}
-      <div className="bg-emerald-900 text-white py-6 px-4 relative z-20 shadow-lg">
-        <div className="container mx-auto text-center">
-          <p className="text-sm md:text-lg font-bold tracking-widest uppercase flex flex-wrap justify-center gap-4 md:gap-8">
+      {/* Hero Tagline Banner - Static (Server Side) */}
+      <div className="bg-emerald-900 text-white py-4 md:py-6 px-0 md:px-4 relative z-20 shadow-lg overflow-hidden">
+        <div className="container mx-auto text-center hidden md:block">
+          <p className="text-lg font-bold tracking-widest uppercase flex flex-wrap justify-center gap-8">
             <span>✨ Unggul Budi Pekerti</span>
-            <span className="hidden md:inline text-emerald-500">|</span>
+            <span className="text-emerald-500">|</span>
             <span>✨ Optimal Prestasi</span>
-            <span className="hidden md:inline text-emerald-500">|</span>
+            <span className="text-emerald-500">|</span>
             <span>✨ Bertauhid Sejak Dini</span>
-            <span className="hidden md:inline text-emerald-500">|</span>
+            <span className="text-emerald-500">|</span>
             <span>✨ Hidupkan Sunnah Nabi</span>
+          </p>
+        </div>
+        {/* Mobile Marquee */}
+        <div className="md:hidden overflow-hidden whitespace-nowrap">
+          <p className="text-sm font-bold tracking-widest uppercase animate-marquee">
+            <span className="mx-4">✨ Unggul Budi Pekerti</span>
+            <span className="mx-4">✨ Optimal Prestasi</span>
+            <span className="mx-4">✨ Bertauhid Sejak Dini</span>
+            <span className="mx-4">✨ Hidupkan Sunnah Nabi</span>
           </p>
         </div>
       </div>
@@ -110,8 +120,8 @@ export default function Home() {
                 "Foto 2x3 & 3x4 Berwarna (Masing-masing 4 Lembar)",
                 "SKL (Diserahkan setelah dinyatakan lulus)"
               ].map((req, idx) => (
-                <li key={idx} className="flex items-center gap-4 group">
-                  <div className="w-10 h-10 rounded-full bg-white border-2 border-emerald-100 text-emerald-600 font-bold flex items-center justify-center shadow-sm group-hover:border-emerald-500 group-hover:bg-emerald-500 group-hover:text-white transition-all duration-300">
+                <li key={idx} className="flex items-start gap-4 group">
+                  <div className="w-10 h-10 rounded-full bg-white border-2 border-emerald-100 text-emerald-600 font-bold flex items-center justify-center shadow-sm group-hover:border-emerald-500 group-hover:bg-emerald-500 group-hover:text-white transition-all duration-300 flex-shrink-0 mt-1">
                     {idx + 1}
                   </div>
                   <span className="text-lg text-slate-700 font-medium group-hover:text-emerald-900 transition-colors">{req}</span>
@@ -134,7 +144,8 @@ export default function Home() {
           </div>
 
           <div className="max-w-5xl mx-auto bg-white rounded-3xl shadow-xl overflow-hidden border border-emerald-100">
-            <div className="overflow-x-auto">
+            {/* Desktop Table */}
+            <div className="hidden md:block overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
                   <tr className="bg-emerald-600 text-white">
@@ -191,6 +202,35 @@ export default function Home() {
                   </tr>
                 </tbody>
               </table>
+            </div>
+
+            {/* Mobile Cards */}
+            <div className="md:hidden space-y-4 p-4 bg-slate-50">
+              {[
+                { name: "Pendaftaran", asrama: "Rp 250.000", non: "Rp 250.000" },
+                { name: "Perlengkapan", asrama: "Rp 2.700.000", non: "-" },
+                { name: "SPP Bulanan", asrama: "Rp 1.000.000", non: "Rp 200.000" },
+                { name: "Bangunan", asrama: "Rp 3.000.000", non: "Rp 1.500.000" },
+                { name: "Seragam Putra", asrama: "Rp 1.500.000", non: "Rp 1.500.000" },
+                { name: "Seragam Putri", asrama: "Rp 1.700.000", non: "Rp 1.700.000" },
+                { name: "Buku/Tahun", asrama: "Rp 800.000", non: "Rp 800.000" },
+                { name: "Ekskul+OSIS/Tahun", asrama: "Rp 200.000", non: "Rp 200.000" },
+                { name: "Buku Raport", asrama: "Rp 100.000", non: "Rp 100.000" },
+              ].map((item, idx) => (
+                <div key={idx} className="bg-white p-4 rounded-xl shadow-sm border border-emerald-100">
+                  <h3 className="font-bold text-emerald-800 text-lg mb-2 border-b border-emerald-50 pb-2">{item.name}</h3>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <p className="text-xs text-emerald-500 uppercase font-bold">Asrama</p>
+                      <p className="font-bold text-slate-700">{item.asrama}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-cyan-500 uppercase font-bold">Non Asrama</p>
+                      <p className="font-bold text-slate-700">{item.non}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
 
             <div className="p-6 bg-slate-50 border-t border-slate-200">

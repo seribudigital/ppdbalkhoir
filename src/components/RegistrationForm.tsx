@@ -224,15 +224,18 @@ export default function RegistrationForm() {
     return (
         <div className="max-w-4xl mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden border border-emerald-100 flex flex-col md:flex-row min-h-[600px]">
             {/* Sidebar / Progress for Desktop */}
-            <div className="bg-emerald-800 text-white p-6 md:w-1/4 flex flex-col justify-between">
+            <div className="bg-emerald-800 text-white p-6 md:w-1/4 flex flex-col md:justify-between">
                 <div>
-                    <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
+                    <h3 className="text-xl font-bold mb-6 flex items-center gap-2 hidden md:flex">
                         <span>📝</span> Pendaftaran
                     </h3>
-                    <div className="space-y-4">
+                    <div className="flex md:block justify-between items-center md:space-y-4 relative">
+                        {/* Connecting Line for Mobile */}
+                        <div className="absolute top-1/2 left-0 w-full h-0.5 bg-emerald-700/50 -z-0 md:hidden -translate-y-1/2"></div>
+
                         {[1, 2, 3, 4].map((s) => (
-                            <div key={s} className={`flex items-center gap-3 ${step === s ? 'opacity-100' : 'opacity-50'}`}>
-                                <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm border-2 ${step >= s ? 'bg-white text-emerald-800 border-white' : 'border-emerald-400 text-emerald-100'}`}>
+                            <div key={s} className={`flex flex-col md:flex-row items-center gap-3 relative z-10 ${step === s ? 'opacity-100 scale-110 md:scale-100' : 'opacity-70'}`}>
+                                <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center font-bold text-sm md:text-base border-2 transition-all ${step >= s ? 'bg-white text-emerald-800 border-white shadow-lg' : 'bg-emerald-900 border-emerald-400 text-emerald-100'}`}>
                                     {s}
                                 </div>
                                 <span className="text-sm font-medium hidden md:block">

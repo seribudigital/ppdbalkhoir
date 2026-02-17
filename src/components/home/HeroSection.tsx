@@ -3,12 +3,7 @@ import React from 'react';
 import Image from 'next/image';
 
 export default function HeroSection() {
-    const scrollToForm = () => {
-        const element = document.getElementById('form-section');
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-        }
-    };
+
 
     return (
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden text-white">
@@ -31,7 +26,7 @@ export default function HeroSection() {
             <div className="absolute inset-0 bg-emerald-900/80"></div>
             <div className="absolute inset-0 bg-gradient-to-t from-emerald-950 via-transparent to-emerald-950/50"></div>
 
-            <div className="container mx-auto px-6 text-center z-10 pt-20">
+            <div className="container mx-auto px-6 text-center z-30 pt-20">
                 <div className="animate-fade-in-up">
                     <div className="inline-block mb-4 px-6 py-2 rounded-full bg-emerald-800/30 border border-emerald-400/30 backdrop-blur-sm">
                         <span className="text-emerald-100 tracking-wider text-sm font-semibold uppercase">Penerimaan Peserta Didik Baru</span>
@@ -49,12 +44,12 @@ export default function HeroSection() {
                         <span className="block mt-2 text-lg font-normal opacity-90">Tingkat MTs & MA (Islamic Center Bin Baz 5 Cab. Cikande)</span>
                     </p>
 
-                    <button
-                        onClick={scrollToForm}
-                        className="px-10 py-5 bg-cyan-600 text-white font-bold text-lg rounded-full shadow-[0_10px_20px_rgba(8,145,178,0.3)] hover:shadow-[0_15px_30px_rgba(8,145,178,0.4)] hover:bg-cyan-500 transition-all duration-300 ring-4 ring-cyan-400/20 transform hover:scale-105 active:scale-95"
+                    <a
+                        href="#form-section"
+                        className="px-10 py-5 bg-cyan-600 text-white font-bold text-lg rounded-full shadow-[0_10px_20px_rgba(8,145,178,0.3)] hover:shadow-[0_15px_30px_rgba(8,145,178,0.4)] hover:bg-cyan-500 transition-all duration-300 ring-4 ring-cyan-400/20 transform hover:scale-105 active:scale-95 inline-block"
                     >
                         Daftar Sekarang
-                    </button>
+                    </a>
                 </div>
             </div>
 
