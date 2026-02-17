@@ -19,6 +19,8 @@ export const metadata: Metadata = {
   description: "Penerimaan Peserta Didik Baru Madrasah Tsanawiyah (MTs) dan Madrasah Aliyah (MA) Al-Khoir Islamic School Bin Baz 5. Sekolah Islam unggulan di Cikande, Serang, Banten dengan kurikulum tahfidz dan asrama.",
   icons: {
     icon: "https://hujtpnndfhnxddglztdn.supabase.co/storage/v1/object/public/seribudigital/mts.webp",
+    shortcut: "https://hujtpnndfhnxddglztdn.supabase.co/storage/v1/object/public/seribudigital/mts.webp",
+    apple: "https://hujtpnndfhnxddglztdn.supabase.co/storage/v1/object/public/seribudigital/mts.webp",
   },
 };
 
