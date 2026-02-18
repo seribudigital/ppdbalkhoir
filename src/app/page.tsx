@@ -25,15 +25,17 @@ const LocationSection = dynamic(() => import('@/components/home/LocationSection'
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-slate-50 text-emerald-900 font-sans selection:bg-cyan-200 selection:text-emerald-900">
+    <main className="min-h-screen bg-transparent text-emerald-900 font-sans selection:bg-cyan-200 selection:text-emerald-900">
 
       <Navbar />
       <HeroSection />
 
       {/* Hero Tagline Banner - Static (Server Side) */}
       {/* Hero Tagline Banner - Static (Server Side) */}
+      {/* Hero Tagline Banner - Static (Server Side) */}
+      {/* Hero Tagline Banner - Static (Server Side) */}
       <div className="bg-emerald-900 text-white py-4 md:py-6 px-0 md:px-4 relative z-20 shadow-lg overflow-hidden">
-        <div className="container mx-auto text-center hidden md:block">
+        <div className="container mx-auto text-center hidden md:block relative z-10">
           <p className="text-lg font-bold tracking-widest uppercase flex flex-wrap justify-center gap-8">
             <span>✨ Unggul Budi Pekerti</span>
             <span className="text-emerald-500">|</span>
@@ -45,7 +47,7 @@ export default function Home() {
           </p>
         </div>
         {/* Mobile Marquee */}
-        <div className="md:hidden overflow-hidden whitespace-nowrap">
+        <div className="md:hidden overflow-hidden whitespace-nowrap relative z-10">
           <p className="text-sm font-bold tracking-widest uppercase animate-marquee">
             <span className="mx-4">✨ Unggul Budi Pekerti</span>
             <span className="mx-4">✨ Optimal Prestasi</span>
@@ -56,10 +58,10 @@ export default function Home() {
       </div>
 
       {/* Section: Latar Belakang - Static (Server Side) */}
-      <section id="latar-belakang" className="py-20 px-6 bg-white">
+      <section id="latar-belakang" className="py-20 px-6 bg-transparent">
         <div className="container mx-auto max-w-4xl text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-emerald-800 mb-8">Latar Belakang</h2>
-          <div className="bg-slate-50 p-8 md:p-12 rounded-3xl border border-slate-100 shadow-sm">
+          <div className="bg-slate-50 p-8 md:p-12 rounded-3xl border border-slate-100 shadow-sm relative z-10">
             <p className="text-lg text-slate-700 leading-relaxed">
               &quot;Madrasah Tsanawiyah dan Madrasah Aliyah Al-Khoir Islamic School Bin Baz 5 merupakan lembaga pendidikan yang memadukan model pendidikan ala pesantren salaf dengan kurikulum modern. Mengadopsi dari sistem pembelajaran yang diterapkan di Islamic Centre Bin Baz Yogyakarta, diharapkan Al Khoir Boarding School ini bisa melahirkan generasi robbani yang senantiasa berpegang pada ajaran-ajaran Al-Qur&apos;an dan Sunnah Rasulullah Shallallahu &apos;alaihi wasallam.&quot;
             </p>
@@ -74,7 +76,7 @@ export default function Home() {
       </div>
 
       {/* Section: Prestasi Kami - Static (Server Side, unless interactive) */}
-      <section className="py-20 px-6 bg-white">
+      <section className="py-20 px-6 bg-transparent">
         <div className="container mx-auto max-w-5xl">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-emerald-800 mb-4">Prestasi Kami</h2>
@@ -82,7 +84,7 @@ export default function Home() {
             <p className="mt-4 text-emerald-600/80 text-lg">Bukti nyata kualitas pendidikan kami.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
             {[
               "Juara 1 Pidato Bahasa Indonesia Tingkat Kabupaten",
               "Juara 2 Musabaqoh Hifdzil Mutun",
@@ -105,14 +107,14 @@ export default function Home() {
       </section>
 
       {/* Section 2: Syarat Pendaftaran - Static (Server Side) */}
-      <section className="py-20 px-6 bg-white">
+      <section className="py-20 px-6 bg-transparent">
         <div className="container mx-auto max-w-4xl">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-emerald-800 mb-4">Syarat Pendaftaran</h2>
             <div className="h-1.5 w-20 bg-emerald-200 mx-auto rounded-full"></div>
           </div>
 
-          <div className="bg-slate-50 rounded-3xl p-8 md:p-12 border border-slate-100 shadow-sm relative overflow-hidden">
+          <div className="bg-slate-50 rounded-3xl p-8 md:p-12 border border-slate-100 shadow-sm relative overflow-hidden z-10">
             <div className="absolute right-0 top-0 opacity-5 pointer-events-none transform translate-x-1/4 -translate-y-1/4">
               <svg width="400" height="400" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
                 <path fill="#10B981" d="M44.7,-76.4C58.9,-69.2,71.8,-59.1,81.6,-46.6C91.4,-34.1,98.1,-19.2,95.8,-4.9C93.5,9.4,82.2,23.1,70.8,34.5C59.4,45.9,47.9,55,35.4,63.4C22.9,71.8,9.4,79.5,-3.3,85.2C-16,90.9,-27.9,94.6,-39,90.6C-50.1,86.6,-60.4,74.9,-69,61.9C-77.6,48.9,-84.5,34.6,-86.3,19.9C-88.1,5.2,-84.8,-9.9,-77.4,-23.4C-70,-36.9,-58.5,-48.8,-46.3,-56.9C-34.1,-65,-21.2,-69.3,-7.6,-56.2L6,10.4Z" transform="translate(100 100)" />
@@ -140,7 +142,7 @@ export default function Home() {
       </section>
 
       {/* Section 3: Rincian Biaya - Static (Server Side) */}
-      <section id="biaya" className="py-24 px-6 bg-slate-50 relative">
+      <section id="biaya" className="py-24 px-6 bg-transparent relative">
         <div className="container mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-emerald-800 mb-4">Rincian Biaya Pendidikan</h2>
@@ -150,7 +152,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="max-w-5xl mx-auto bg-white rounded-3xl shadow-xl overflow-hidden border border-emerald-100">
+          <div className="max-w-5xl mx-auto bg-white rounded-3xl shadow-xl overflow-hidden border border-emerald-100 relative z-10">
             {/* Desktop Table */}
             <div className="hidden md:block overflow-x-auto">
               <table className="w-full text-left border-collapse">
@@ -225,7 +227,7 @@ export default function Home() {
                 { name: "Buku Raport", asrama: "Rp 100.000", non: "Rp 100.000" },
               ].map((item, idx) => (
                 <div key={idx} className="bg-white p-4 rounded-xl shadow-sm border border-emerald-100">
-                  <h3 className="font-bold text-emerald-800 text-lg mb-2 border-b border-emerald-50 pb-2">{item.name}</h3>
+                  <h3 className="font-bold text-emerald-800 mb-2 border-b border-emerald-50 pb-2">{item.name}</h3>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <p className="text-xs text-emerald-500 uppercase font-bold">Asrama</p>
@@ -290,8 +292,8 @@ export default function Home() {
       <LocationSection />
 
       {/* Simple Footer - Static (Server Side) */}
-      <footer id="kontak" className="bg-slate-900 text-slate-500 py-8 text-center text-sm">
-        <div className="container mx-auto px-6">
+      <footer id="kontak" className="bg-slate-900 text-slate-500 py-8 text-center text-sm relative overflow-hidden">
+        <div className="container mx-auto px-6 relative z-10">
           <p className="mb-4">&copy; {new Date().getFullYear()} Al-Khoir Islamic School Bin Baz 5. All rights reserved.</p>
           <Link href="/admin" className="text-slate-700 hover:text-slate-400 transition-colors text-xs">
             Login Admin

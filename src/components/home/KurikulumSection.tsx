@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 export default function KurikulumSection() {
     return (
-        <section className="py-20 px-6 bg-emerald-50 relative overflow-hidden">
+        <section className="py-20 px-6 bg-transparent relative overflow-hidden">
             <div className="container mx-auto relative z-10">
                 <div className="text-center mb-16">
                     <h2 className="text-4xl font-bold text-emerald-800 mb-4">Kurikulum & Pengajar</h2>

@@ -35,8 +35,9 @@ export default function RootLayout({
         <link rel="preconnect" href="https://hujtpnndfhnxddglztdn.supabase.co" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased relative bg-slate-50`}
       >
+        <div className="bg-islamic-pattern-fixed"></div>
         {children}
       </body>
     </html>

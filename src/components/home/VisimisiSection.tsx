@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 export default function VisimisiSection() {
     return (
-        <section className="py-20 px-6 bg-slate-50 relative overflow-hidden">
+        <section className="py-20 px-6 bg-transparent relative overflow-hidden">
             {/* Background Elements */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-cyan-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>

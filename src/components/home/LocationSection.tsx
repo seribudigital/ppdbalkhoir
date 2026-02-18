@@ -2,7 +2,7 @@ import React from 'react';
 
 const LocationSection = () => {
     return (
-        <section id="lokasi" className="py-20 px-6 bg-slate-50">
+        <section id="lokasi" className="py-20 px-6 bg-transparent">
             <div className="container mx-auto max-w-6xl">
                 <div className="text-center mb-12">
                     <h2 className="text-3xl md:text-4xl font-bold text-emerald-800 mb-4">Lokasi Kami</h2>
