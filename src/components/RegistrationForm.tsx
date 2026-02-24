@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { tambahPendaftar, PendaftarData } from '@/lib/firebase/pendaftar';
+import RegistrationSuccess from '@/components/ui/RegistrationSuccess';
 
 // Input Field Component (Defined Outside to prevent re-renders)
 interface InputFieldProps {
@@ -71,6 +72,7 @@ export default function RegistrationForm() {
     const [step, setStep] = useState(1);
     const [loading, setLoading] = useState(false);
     const [submitted, setSubmitted] = useState(false);
+    const [registeredId, setRegisteredId] = useState('');
     const [error, setError] = useState('');
     const [isMounted, setIsMounted] = useState(false);
 
@@ -177,6 +179,7 @@ export default function RegistrationForm() {
         try {
             const res = await tambahPendaftar(payload);
             if (res.success) {
+                setRegisteredId(res.id || '');
                 setSubmitted(true);
             } else {
                 setError('Gagal mengirim data. Silakan coba lagi.');
@@ -196,29 +199,13 @@ export default function RegistrationForm() {
 
     if (submitted) {
         return (
-            <div className="max-w-2xl mx-auto p-8 bg-white rounded-3xl shadow-xl text-center border-t-8 border-emerald-500">
-                <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ type: "spring", stiffness: 260, damping: 20 }}
-                    className="w-24 h-24 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-6"
-                >
-                    <svg className="w-12 h-12 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                    </svg>
-                </motion.div>
-                <h2 className="text-3xl font-bold text-emerald-800 mb-4">Alhamdulillah!</h2>
-                <p className="text-emerald-700/80 text-lg mb-8">
-                    Data pendaftaran berhasil dikirim. Silakan tunggu informasi selanjutnya dari panitia melalui WhatsApp.
-                </p>
-                <button
-                    onClick={() => window.location.reload()}
-                    className="px-8 py-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition font-semibold"
-                >
-                    Kembali ke Beranda
-                </button>
-            </div>
-        )
+            <RegistrationSuccess
+                namaLengkap={formData.nama_lengkap || ''}
+                jenjang={formData.tingkat_pendidikan || ''}
+                nisn={formData.nisn || ''}
+                registrationId={registeredId}
+            />
+        );
     }
 
     return (
